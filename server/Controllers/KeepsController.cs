@@ -28,8 +28,23 @@ public class KeepsController : ControllerBase
             Account userInfo = await _auth0.GetUserInfoAsync<Account>(HttpContext);
             keepData.CreatorId = userInfo.Id;
             Keep keep = _keepsService.CreateKeep(keepData);
-            return keep;
+            return Ok(keep);
 
+        }
+        catch (Exception e)
+        {
+
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpGet]
+    public ActionResult<List<Keep>> GetKeeps()
+    {
+        try
+        {
+            List<Keep> keeps = _keepsService.GetKeeps();
+            return Ok(keeps);
         }
         catch (Exception e)
         {
