@@ -1,5 +1,9 @@
 
 
+
+
+
+
 namespace keepr.Repositories;
 
 public class KeepsRepository
@@ -43,5 +47,45 @@ public class KeepsRepository
 
         List<Keep> keeps = _db.Query<Keep, Account, Keep>(sql, KeepsBuilder).ToList();
         return keeps;
+    }
+
+    internal Keep GetKeepById(int keepId)
+    {
+        string sql = @"
+        
+        SELECT *
+        FROM keeps
+        JOIN accounts ON keeps.creatorId = accounts.id
+        WHERE keeps.id = @KeepId;";
+
+        Keep keep = _db.Query<Keep, Account, Keep>(sql, KeepsBuilder, new { keepId }).FirstOrDefault();
+        return keep;
+    }
+
+    internal Keep EditKeep(Keep originalKeep)
+    {
+        string sql = @"
+       
+       UPDATE keeps
+       SET 
+       name = @Name,
+       description = @Description,
+       img = @img;
+       
+
+       SELECT *
+       FROM keeps
+       JOIN accounts ON keeps.creatorId = accounts.id
+       WHERE keeps.id = @Id ;";
+
+        Keep keep = _db.Query<Keep, Account, Keep>(sql, KeepsBuilder, originalKeep).FirstOrDefault();
+        return keep;
+    }
+
+    internal void DestroyKeep(int keepId)
+    {
+        string sql = "DELETE FROM keeps WHERE id = @keepId LIMIT 1;";
+
+        _db.Execute(sql, new { keepId });
     }
 }

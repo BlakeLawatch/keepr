@@ -1,5 +1,11 @@
 
 
+
+
+
+
+using System.Runtime.ExceptionServices;
+
 namespace keepr.Services;
 
 public class KeepsService
@@ -17,9 +23,48 @@ public class KeepsService
         return keep;
     }
 
+    internal string DestroyKeep(int keepId, string userId)
+    {
+        Keep keep = GetKeepById(keepId);
+        if (keep.CreatorId != userId)
+        {
+            throw new Exception($"You are not the owner of the keep with the ID of {keepId}");
+        }
+
+        _repo.DestroyKeep(keepId);
+        return "Keep has been deleted";
+    }
+
+    internal Keep EditKeep(int keepId, Account userInfo, Keep keepData)
+    {
+        Keep originalKeep = GetKeepById(keepId);
+        if (userInfo.Id != originalKeep.CreatorId)
+        {
+            throw new Exception($"Keep with the edit of {keepId} is not yours to edit. Please log in as the correct user.");
+        }
+        originalKeep.Name = keepData.Name ?? originalKeep.Name;
+        originalKeep.Description = keepData.Description ?? originalKeep.Description;
+        originalKeep.Img = keepData.Img ?? originalKeep.Img;
+
+        Keep keep = _repo.EditKeep(originalKeep);
+        return keep;
+    }
+
+    internal Keep GetKeepById(int keepId)
+    {
+        Keep keep = _repo.GetKeepById(keepId);
+        if (keep == null)
+        {
+            throw new Exception($"The keep with the id of {keepId} does not exist");
+        }
+        return keep;
+    }
+
     internal List<Keep> GetKeeps()
     {
         List<Keep> keeps = _repo.GetKeeps();
         return keeps;
     }
+
+
 }
