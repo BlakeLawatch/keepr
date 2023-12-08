@@ -19,7 +19,7 @@ public class VaultsService
 
     internal string DestroyVault(int vaultId, string userId)
     {
-        Vault vault = GetVaultById(vaultId);
+        Vault vault = GetVaultById(vaultId, userId);
         if (vault.CreatorId != userId)
         {
             throw new Exception($"The Vault with the ID of {vaultId} is not your vault to delete");
@@ -28,13 +28,14 @@ public class VaultsService
         return "Vault has been deleted";
     }
 
-    internal Vault EditVault(int vaultId, Account userInfo, Vault vaultData)
+    internal Vault EditVault(int vaultId, string userId, Vault vaultData)
     {
-        Vault originalVault = GetVaultById(vaultId);
-        if (userInfo.Id != originalVault.CreatorId)
+        Vault originalVault = GetVaultById(vaultId, userId);
+        if (originalVault.CreatorId != userId)
         {
             throw new Exception($"This vault with the ID of {vaultId} is not yours to edit");
         }
+
         originalVault.Name = vaultData.Name ?? originalVault.Name;
         originalVault.Description = vaultData.Description ?? originalVault.Description;
         originalVault.Img = vaultData.Img ?? originalVault.Img;
@@ -44,12 +45,16 @@ public class VaultsService
         return vault;
     }
 
-    internal Vault GetVaultById(int vaultId)
+    internal Vault GetVaultById(int vaultId, string userId)
     {
         Vault vault = _repo.GetVaultById(vaultId);
         if (vault == null)
         {
             throw new Exception("This Vault does not exist");
+        }
+        if (vault.IsPrivate == true && vault.CreatorId != userId)
+        {
+            throw new Exception("You can't go there...");
         }
         return vault;
     }
