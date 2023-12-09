@@ -6,6 +6,7 @@
       </div>
     </section>
   </div>
+  <ActiveKeepModal />
 </template>
 
 <script>
@@ -14,6 +15,7 @@ import { keepsService } from '../services/KeepsService.js'
 import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState';
 import KeepsComponent from '../components/KeepsComponent.vue';
+import ActiveKeepModal from '../components/ActiveKeepModal.vue';
 
 export default {
   setup() {
@@ -33,7 +35,7 @@ export default {
 
     };
   },
-  components: { KeepsComponent }
+  components: { KeepsComponent, ActiveKeepModal }
 }
 </script>
 
