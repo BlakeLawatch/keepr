@@ -1,8 +1,13 @@
 <template>
-    <div @click="setActiveKeep()"
-        class="selectable box-shadow bg-img my-3 d-flex align-items-end justify-content-between p-2">
-        <p class="mb-0 text-shadow text-light d-flex fs-4 fw-bold"> {{ keep.name }}</p>
-        <img class="img-fluid profile" :src="keep.creator.picture" alt="" :title="keep.creator.name">
+    <div @click="setActiveKeep()" class="selectable box-shadow bg-img align-items-between">
+        <div class="text-end">
+            <button @click.stop="destroyKeep(keep.id)" class="btn btn-danger rounded-circle"><i
+                    class="mdi mdi-close"></i></button>
+        </div>
+        <div class=" my-3 d-flex justify-content-between p-2">
+            <p class="mb-0 text-shadow text-light d-flex fs-4 fw-bold"> {{ keep.name }}</p>
+            <img class="img-fluid profile" :src="keep.creator.picture" alt="" :title="keep.creator.name">
+        </div>
     </div>
 </template>
 
@@ -12,6 +17,7 @@ import { computed } from 'vue';
 import { Keep } from '../models/Keep';
 import { keepsService } from '../services/KeepsService';
 import { Modal } from 'bootstrap';
+import Pop from '../utils/Pop';
 
 
 
@@ -27,6 +33,14 @@ export default {
             setActiveKeep() {
                 keepsService.setActiveKeep(props.keep)
                 Modal.getOrCreateInstance('#keepModal').show()
+            },
+
+            async destroyKeep(keepId) {
+                try {
+                    keepsService.destroyKeep(keepId)
+                } catch (error) {
+                    Pop.error(error)
+                }
             }
 
         }
