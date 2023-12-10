@@ -1,5 +1,5 @@
 <template>
-    <div @click="setActiveKeep()" class="selectable box-shadow bg-img align-items-between">
+    <div @click="setActiveKeep()" class="selectable box-shadow bg-img align-items-between my-3">
         <div class="text-end">
             <button @click.stop="destroyKeep(keep.id)" class="btn btn-danger rounded-circle"><i
                     class="mdi mdi-close"></i></button>

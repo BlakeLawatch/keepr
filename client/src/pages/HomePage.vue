@@ -1,9 +1,9 @@
 <template>
   <div class="container-fluid">
-    <section class="row justify-content-center">
+    <section v-if="account.id" class="row justify-content-center">
       <div class="col-2">
-        <button data-bs-toggle="modal" data-bs-target="#createKeep">Create Keep</button>
-        <button data-bs-toggle="modal" data-bs-target="#createVault">Create Vault</button>
+        <button class="mx-1" data-bs-toggle="modal" data-bs-target="#createKeep">Create Keep</button>
+        <button class="mx-1" data-bs-toggle="modal" data-bs-target="#createVault">Create Vault</button>
         <!-- <form>
           <label for="option" class="form-label"></label>
           <select name="" id="" class="form-select">
@@ -52,6 +52,7 @@ export default {
     }
     return {
       keeps: computed(() => AppState.keeps),
+      account: computed(() => AppState.account)
 
     };
   },
