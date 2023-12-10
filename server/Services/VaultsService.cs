@@ -1,5 +1,6 @@
 
 
+
 namespace keepr.Services;
 
 public class VaultsService
@@ -43,6 +44,13 @@ public class VaultsService
 
         Vault vault = _repo.EditVault(originalVault);
         return vault;
+    }
+
+    internal List<Vault> GetAccountVaults(string userId)
+    {
+        List<Vault> vault = _repo.GetAccountVaults(userId);
+        return vault;
+
     }
 
     internal Vault GetVaultById(int vaultId, string userId)

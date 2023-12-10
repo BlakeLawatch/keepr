@@ -25,7 +25,7 @@ public class KeepsService
 
     internal string DestroyKeep(int keepId, string userId)
     {
-        Keep keep = GetKeepById(keepId);
+        Keep keep = GetKeepById(keepId, userId);
         if (keep.CreatorId != userId)
         {
             throw new Exception($"You are not the owner of the keep with the ID of {keepId}");
@@ -37,7 +37,7 @@ public class KeepsService
 
     internal Keep EditKeep(int keepId, Account userInfo, Keep keepData)
     {
-        Keep originalKeep = GetKeepById(keepId);
+        Keep originalKeep = GetKeepById(keepId, userInfo.Id);
         if (userInfo.Id != originalKeep.CreatorId)
         {
             throw new Exception($"Keep with the edit of {keepId} is not yours to edit. Please log in as the correct user.");
@@ -50,13 +50,21 @@ public class KeepsService
         return keep;
     }
 
-    internal Keep GetKeepById(int keepId)
+    internal Keep GetKeepById(int keepId, string userId)
     {
         Keep keep = _repo.GetKeepById(keepId);
         if (keep == null)
         {
             throw new Exception($"The keep with the id of {keepId} does not exist");
         }
+        return keep;
+    }
+
+    internal Keep GetKeepByIdAndIncrementVisits(int keepId, string userId)
+    {
+        Keep keep = GetKeepById(keepId, userId);
+        keep.Views++;
+        _repo.EditKeep(keep);
         return keep;
     }
 
