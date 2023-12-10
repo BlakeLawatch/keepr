@@ -24,8 +24,12 @@
                                         <button class="btn">save</button>
                                     </div>
                                     <div class="d-flex">
-                                        <img class="profile" :src="activeKeep.creator.picture" alt=""
-                                            :title="activeKeep.creator.name">
+                                        <router-link @click.stop
+                                            :to="{ name: 'Profile', params: { profileId: activeKeep.creatorId } }">
+                                            <img class="profile" :src="activeKeep.creator.picture" alt=""
+                                                :title="activeKeep.creator.name">
+
+                                        </router-link>
                                         <p class="mb-0">{{ activeKeep.creator.name }}</p>
                                     </div>
                                 </div>

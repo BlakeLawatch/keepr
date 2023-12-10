@@ -1,3 +1,4 @@
+
 namespace keepr.Services;
 
 public class AccountService
@@ -24,11 +25,21 @@ public class AccountService
     return profile;
   }
 
-  internal Account Edit(Account editData, string userEmail)
+  // internal Account Edit(Account editData, string userEmail)
+  // {
+  //   Account original = GetProfileByEmail(userEmail);
+  //   original.Name = editData.Name?.Length > 0 ? editData.Name : original.Name;
+  //   original.Picture = editData.Picture?.Length > 0 ? editData.Picture : original.Picture;
+  //   return _repo.Edit(original);
+  // }
+
+  internal Account EditAccount(Account user, string accountId, Account accountData)
   {
-    Account original = GetProfileByEmail(userEmail);
-    original.Name = editData.Name?.Length > 0 ? editData.Name : original.Name;
-    original.Picture = editData.Picture?.Length > 0 ? editData.Picture : original.Picture;
-    return _repo.Edit(original);
+    Account original = GetProfileByEmail(user.Email);
+    original.Picture = accountData.Picture ?? original.Picture;
+    original.Name = accountData.Name ?? original.Name;
+    original.CoverImg = accountData.CoverImg ?? original.CoverImg;
+    Account newAccount = _repo.EditAccount(original);
+    return newAccount;
   }
 }

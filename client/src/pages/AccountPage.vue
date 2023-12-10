@@ -2,8 +2,10 @@
   <div class="container">
     <section class="row">
       <div class="col-12">
+        <button data-bs-toggle="modal" data-bs-target="#editAccountModal" class="btn">Edit Account</button>
         <img :src="account.coverImg" alt="">
         <img :src="account.picture" alt="">
+        <p>{{ account.name }}</p>
       </div>
     </section>
     <section>
@@ -15,12 +17,14 @@
       </div>
     </section>
   </div>
+  <EditAccountModal />
 </template>
 
 <script>
 import { computed } from 'vue';
 import { AppState } from '../AppState';
 import KeepsComponent from '../components/KeepsComponent.vue';
+import EditAccountModal from '../components/EditAccountModal.vue';
 export default {
   setup() {
     return {
@@ -29,7 +33,7 @@ export default {
       keeps: computed(() => AppState.keeps)
     };
   },
-  components: { KeepsComponent }
+  components: { KeepsComponent, EditAccountModal }
 }
 </script>
 

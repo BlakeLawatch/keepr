@@ -6,14 +6,15 @@
         </div>
         <div class=" my-3 d-flex justify-content-between p-2">
             <p class="mb-0 text-shadow text-light d-flex fs-4 fw-bold"> {{ keep.name }}</p>
-            <!-- <router-link :to="{ name: 'Profile', params: { profileId: profile.id } }"> -->
-            <img class="img-fluid profile" :src="keep.creator.picture" alt="" :title="keep.creator.name">
+            <router-link @click.stop :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
+                <img class="img-fluid profile" :src="keep.creator.picture" alt="" :title="keep.creator.name">
 
-            <!-- </router-link> -->
+            </router-link>
         </div>
     </div>
 </template>
 
+data-bs-toggle="modal" data-bs-target="#keepModal"
 
 <script>
 import { computed } from 'vue';
@@ -33,7 +34,7 @@ export default {
     setup(props) {
         return {
             coverImg: computed(() => `url(${props.keep.img})`),
-            profile: computed(() => AppState.account),
+            account: computed(() => AppState.account),
 
             setActiveKeep() {
                 keepsService.setActiveKeep(props.keep)

@@ -77,16 +77,12 @@ public class VaultsRepository
     internal List<Vault> GetAccountVaults(string userId)
     {
         string sql = @"
-        SELECT 
-        vaults.*,
-        keeps.*
-        accounts.*
+        SELECT *
         FROM vaults
-        JOIN keeps ON vaults.keepId = vaults.id
-        JOIN accounts ON vaults.creatorId = account.id
-        WHERE vaults.creatorId = @userId;";
+        JOIN accounts ON vaults.creatorId = accounts.id
+        WHERE vaults.creatorId = @UserId;";
 
-        List<Vault> vaults = _db.Query<Vault, Account, Vault>(sql, VaultBuilder).ToList();
+        List<Vault> vaults = _db.Query<Vault, Account, Vault>(sql, VaultBuilder, new { userId }).ToList();
         return vaults;
     }
 
