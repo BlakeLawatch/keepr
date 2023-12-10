@@ -11,7 +11,7 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="d-flex justify-content-center">
-                                    <p class="me-1">0 <i class="mdi mdi-eye"></i></p>
+                                    <p class="me-1">{{ activeKeep.views }} <i class="mdi mdi-eye"></i></p>
                                     <p class="ms-1">0 <i class="mdi mdi-pin"></i></p>
                                 </div>
                                 <div class="text-center">

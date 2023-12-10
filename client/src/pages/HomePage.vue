@@ -39,8 +39,8 @@ export default {
   setup() {
     watch(() => {
       getKeeps()
-    }
-    )
+    }, { immediate: true }
+    );
 
     async function getKeeps() {
       try {

@@ -74,5 +74,9 @@ public class KeepsService
         return keeps;
     }
 
-
+    internal List<Keep> GetKeepsByProfileId(string profileId)
+    {
+        List<Keep> keeps = _repo.GetKeepsByProfileId(profileId);
+        return keeps;
+    }
 }

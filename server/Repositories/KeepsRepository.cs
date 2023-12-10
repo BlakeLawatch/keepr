@@ -4,6 +4,8 @@
 
 
 
+
+
 namespace keepr.Repositories;
 
 public class KeepsRepository
@@ -70,7 +72,9 @@ public class KeepsRepository
        SET 
        name = @Name,
        description = @Description,
-       img = @img;
+       img = @Img,
+       views = @Views
+        WHERE id = @Id;
        
 
        SELECT *
@@ -87,5 +91,17 @@ public class KeepsRepository
         string sql = "DELETE FROM keeps WHERE id = @keepId LIMIT 1;";
 
         _db.Execute(sql, new { keepId });
+    }
+
+    internal List<Keep> GetKeepsByProfileId(string profileId)
+    {
+        string sql = @"
+        SELECT *
+        FROM keeps
+        JOIN accounts ON keeps.creatorId = accounts.id
+        WHERE keeps.creatorId = @ProfileId;";
+
+        List<Keep> keeps = _db.Query<Keep, Account, Keep>(sql, KeepsBuilder, new { profileId }).ToList();
+        return keeps;
     }
 }

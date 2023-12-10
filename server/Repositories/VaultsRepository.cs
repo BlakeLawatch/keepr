@@ -89,4 +89,16 @@ public class VaultsRepository
         List<Vault> vaults = _db.Query<Vault, Account, Vault>(sql, VaultBuilder).ToList();
         return vaults;
     }
+
+    internal List<Vault> GetVaultsByProfileId(string profileId)
+    {
+        string sql = @"
+        SELECT *
+        FROM vaults
+        JOIN accounts ON vaults.creatorId = accounts.id
+        WHERE vaults.creatorId = @ProfileId;";
+
+        List<Vault> vaults = _db.Query<Vault, Account, Vault>(sql, VaultBuilder, new { profileId }).ToList();
+        return vaults;
+    }
 }
