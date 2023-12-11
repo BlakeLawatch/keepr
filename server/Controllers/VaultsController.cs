@@ -88,20 +88,22 @@ public class VaultsController : ControllerBase
     }
 
 
-    // [HttpGet("{vaultId}/keeps")]
-    // public async Task<ActionResult<List<VaultKeep>>> GetKeepsInVault(int vaultId)
-    // {
-    //     try
-    //     {
-    //         Account userInfo = await _auth0.GetUserInfoAsync<Account>(HttpContext);
-    //         List<VaultKeep> vaultKeeps = _vaultKeepsService.GetKeepsInVault(vaultId, userInfo?.Id);
-    //         return Ok(vaultKeeps);
+    [HttpGet("{vaultId}/keeps")]
+    public async Task<ActionResult<List<KeepInVault>>> GetKeepsInVault(int vaultId)
+    {
+        try
+        {
+            Account userInfo = await _auth0.GetUserInfoAsync<Account>(HttpContext);
+            List<KeepInVault> keeps = _vaultKeepsService.GetKeepsInVault(vaultId);
+            return Ok(keeps);
 
-    //     }
-    //     catch (Exception e)
-    //     {
+        }
+        catch (Exception e)
+        {
 
-    //         return BadRequest(e.Message);
-    //     }
-    // }
+            return BadRequest(e.Message);
+        }
+    }
+
+
 }

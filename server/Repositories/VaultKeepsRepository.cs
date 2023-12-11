@@ -1,5 +1,8 @@
 
 
+
+
+
 namespace keepr.Repositories;
 
 public class VaultKeepsRepository
@@ -40,6 +43,43 @@ public class VaultKeepsRepository
         return vaultKeep;
 
 
+    }
+
+    internal List<KeepInVault> GetKeepsInVault(int vaultId)
+    {
+        string sql = @"
+        SELECT *
+        FROM vaultKeeps
+        JOIN keeps ON vaultKeeps.keepId = keeps.id
+        JOIN accounts ON accounts.id = vaultKeeps.creatorId
+        WHERE vaultKeeps.vaultId = @VaultId;";
+
+        List<KeepInVault> keeps = _db.Query<VaultKeep, KeepInVault, Account, KeepInVault>(sql, (vaultKeep, keepInVault, account) =>
+        {
+            // keepInVault.KeepsInVaultId = vaultKeep.Id;
+            keepInVault.VaultKeepId = vaultKeep.Id;
+            keepInVault.AccountId = vaultKeep.CreatorId;
+            keepInVault.Creator = account;
+            return keepInVault;
+        }, new { vaultId }).ToList();
+        return keeps;
+
+
+    }
+
+    internal VaultKeep GetVaultKeepById(int vaultKeepId)
+    {
+        string sql = "SELECT * FROM vaultKeeps WHERE id = @VaultKeepId;";
+
+        VaultKeep vaultKeep = _db.Query<VaultKeep>(sql, new { vaultKeepId }).FirstOrDefault();
+        return vaultKeep;
+    }
+
+    internal void DestroyVaultKeep(int vaultKeepId)
+    {
+        string sql = "DELETE FROM vaultKeeps WHERE id = @VaultKeepId;";
+
+        _db.Execute(sql, new { vaultKeepId });
     }
 
     // internal List<VaultKeep> GetKeepsInVault(int vaultId)
