@@ -1,4 +1,5 @@
 
+
 namespace keepr.Repositories;
 
 public class VaultKeepsRepository
@@ -8,6 +9,12 @@ public class VaultKeepsRepository
     public VaultKeepsRepository(IDbConnection db)
     {
         _db = db;
+    }
+
+    private VaultKeep VaultKeepBuilder(VaultKeep vaultKeep, Account account)
+    {
+        vaultKeep.Creator = account;
+        return vaultKeep;
     }
 
     internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepData)
@@ -34,13 +41,19 @@ public class VaultKeepsRepository
 
 
     }
-    // SELECT 
-    // vaults.*,
-    // keeps.*,
-    // accounts.*
+
+    // internal List<VaultKeep> GetKeepsInVault(int vaultId)
+    // {
+    //     string sql = @"
+    // SELECT *
     // FROM vaultKeeps
-    // JOIN keeps ON vaultKeeps.keepId = keeps.id
-    // JOIN vaults ON vaultKeeps.vaultId = vaults.id
     // JOIN accounts ON vaultKeeps.creatorId = accounts.id
-    // ;";
+    // WHERE vaultKeeps.vaultId = @VaultId;";
+
+    //     List<VaultKeep> vaultKeeps = _db.Query<VaultKeep, Account, VaultKeep>(sql, VaultKeepBuilder, new { vaultId }).ToList();
+    //     return vaultKeeps;
+
+    // }
+
+
 }
