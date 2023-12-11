@@ -17,7 +17,9 @@ public class VaultKeepsRepository
         vaultKeeps (vaultId, keepId, creatorId)
         VALUES (@VaultId, @KeepId, @CreatorId);
 
-        SELECT * FROM vaultKeeps WHERE id = LAST_INSERT_ID();";
+        SELECT *
+         FROM vaultKeeps
+        WHERE vaultKeeps.id = LAST_INSERT_ID();";
 
         VaultKeep vaultKeep = _db.Query<VaultKeep>(sql, vaultKeepData).FirstOrDefault();
         return vaultKeep;
