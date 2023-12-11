@@ -94,7 +94,7 @@ public class VaultsController : ControllerBase
         try
         {
             Account userInfo = await _auth0.GetUserInfoAsync<Account>(HttpContext);
-            List<KeepInVault> keeps = _vaultKeepsService.GetKeepsInVault(vaultId);
+            List<KeepInVault> keeps = _vaultKeepsService.GetKeepsInVault(vaultId, userInfo?.Id);
             return Ok(keeps);
 
         }
@@ -104,6 +104,27 @@ public class VaultsController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+
+    // [Authorize]
+    // [HttpGet("{privateVaultId}/keeps")]
+
+    // public async Task<ActionResult<List<Vault>>> GetPrivateVaultsById(int privateVaultId)
+    // {
+    //     try
+    //     {
+    //         Account userInfo = await _auth0.GetUserInfoAsync<Account>(HttpContext);
+    //         List<Vault> privateVaults = _vaultsService.GetPrivateVaultsById(privateVaultId);
+    //         return Ok(privateVaults);
+
+    //     }
+    //     catch (Exception e)
+    //     {
+
+    //         return BadRequest(e.Message);
+    //     }
+    // }
+
+
 
 
 }

@@ -15,13 +15,13 @@ public class VaultKeepsService
         _vaultsService = vaultsService;
     }
 
-    internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepData)
+    internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepData, string userId)
     {
         _vaultsService.GetVaultById(vaultKeepData.VaultId, vaultKeepData.CreatorId);
-        // if (vaultKeepData.CreatorId != userId)
-        // {
-        //     throw new Exception();
-        // }
+        if (vaultKeepData.CreatorId != userId)
+        {
+            throw new Exception("Not your vault");
+        }
         VaultKeep vaultKeep = _repo.CreateVaultKeep(vaultKeepData);
 
         return vaultKeep;
@@ -48,8 +48,10 @@ public class VaultKeepsService
         return "This vault keep has been deleted";
     }
 
-    internal List<KeepInVault> GetKeepsInVault(int vaultId)
+    internal List<KeepInVault> GetKeepsInVault(int vaultId, string userId)
     {
+        // List<KeepInVault> keeps = _repo.GetKeepsInVault(vaultId);
+        _vaultsService.GetVaultById(vaultId, userId);
         List<KeepInVault> keeps = _repo.GetKeepsInVault(vaultId);
         return keeps;
     }
