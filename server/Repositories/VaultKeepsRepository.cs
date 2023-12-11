@@ -18,18 +18,19 @@ public class VaultKeepsRepository
         VALUES (@VaultId, @KeepId, @CreatorId);
 
         SELECT *
-         FROM vaultKeeps
+        FROM vaultKeeps
+        JOIN accounts ON accounts.id = vaultKeeps.creatorId
         WHERE vaultKeeps.id = LAST_INSERT_ID();";
 
-        VaultKeep vaultKeep = _db.Query<VaultKeep>(sql, vaultKeepData).FirstOrDefault();
-        return vaultKeep;
-
-        // VaultKeep vaultKeep = _db.Query<VaultKeep, Account, VaultKeep>(sql, (vaultKeep, account) =>
-        // {
-        //     vaultKeep.Creator = account;
-        //     return vaultKeep;
-        // }, vaultKeepData).FirstOrDefault();
+        // VaultKeep vaultKeep = _db.Query<VaultKeep>(sql, vaultKeepData).FirstOrDefault();
         // return vaultKeep;
+
+        VaultKeep vaultKeep = _db.Query<VaultKeep, Account, VaultKeep>(sql, (vaultKeep, account) =>
+        {
+            vaultKeep.Creator = account;
+            return vaultKeep;
+        }, vaultKeepData).FirstOrDefault();
+        return vaultKeep;
 
 
     }
