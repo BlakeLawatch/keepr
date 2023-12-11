@@ -17,17 +17,17 @@ public class VaultKeepsRepository
         vaultKeeps (vaultId, keepId, creatorId)
         VALUES (@VaultId, @KeepId, @CreatorId);
 
-        SELECT *
-        FROM vaultKeeps
-        JOIN accounts ON vaultKeeps.creatorId = accounts.id
-        WHERE vaultKeeps.id = LAST_INSERT_ID();";
+        SELECT * FROM vaultKeeps WHERE id = LAST_INSERT_ID();";
 
-        VaultKeep vaultKeep = _db.Query<VaultKeep, Account, VaultKeep>(sql, (vaultKeep, account) =>
-        {
-            vaultKeep.Creator = account;
-            return vaultKeep;
-        }, vaultKeepData).FirstOrDefault();
+        VaultKeep vaultKeep = _db.Query<VaultKeep>(sql, vaultKeepData).FirstOrDefault();
         return vaultKeep;
+
+        // VaultKeep vaultKeep = _db.Query<VaultKeep, Account, VaultKeep>(sql, (vaultKeep, account) =>
+        // {
+        //     vaultKeep.Creator = account;
+        //     return vaultKeep;
+        // }, vaultKeepData).FirstOrDefault();
+        // return vaultKeep;
 
 
     }

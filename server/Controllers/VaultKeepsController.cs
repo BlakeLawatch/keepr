@@ -1,7 +1,7 @@
 namespace keepr.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 
 public class VaultKeepsController : ControllerBase
 {
