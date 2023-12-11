@@ -1,11 +1,12 @@
 <template>
     <div class="bg-img col-12 my-2 box-shadow">
         <div class="text-end">
-            <button class="btn btn-danger rounded-circle fs-6"><i class="mdi mdi-close"></i></button>
+            <button @click="destroyVault(vault.id)" class="btn btn-danger rounded-circle fs-6"><i
+                    class="mdi mdi-close"></i></button>
         </div>
         <div class="d-flex align-items-end justify-content-around">
-            <router-link>
-                <h3 class="text-shadow text-light">{{ vault.name }}</h3>
+            <router-link :to="{ name: 'Vault', params: { vaultId: vault.id } }">
+                <h3 class="selectable text-shadow text-light" :title="vault.name">{{ vault.name }}</h3>
             </router-link>
             <p class="mb-0 fs-2 text-light text-shadow" v-if="vault.isPrivate"><i class="mdi mdi-lock-outline"></i></p>
 
@@ -18,6 +19,8 @@
 import { computed } from 'vue';
 import { Vault } from '../models/Vault';
 import { AppState } from '../AppState';
+import Pop from '../utils/Pop';
+import { vaultsService } from '../services/VaultsService';
 
 
 export default {
@@ -27,7 +30,18 @@ export default {
     setup(props) {
         return {
             coverImg: computed(() => `url(${props.vault.img})`),
-            account: computed(() => AppState.account)
+            account: computed(() => AppState.account),
+
+            async destroyVault(vaultId) {
+                try {
+                    const wantsToDelete = await Pop.confirm('You want to delete your vault?')
+                    if (!wantsToDelete) {
+                        return
+                    } await vaultsService.destroyVault(vaultId)
+                } catch (error) {
+                    Pop.error(error)
+                }
+            }
         }
     }
 };
