@@ -8,32 +8,47 @@
         <p>{{ account.name }}</p>
       </div>
     </section>
-    <section>
-      <div class="col-6 col-md-3">
-        Vaults will go here
+    <section class="row">
+      <div v-for="vault in vaults" :key="vault.id" class="col-6 col-md-3">
+        <VaultsComponent :vault="vault" />
       </div>
-      <div v-for="keep in keeps" :key="keep.id" class="col-6 col-md-3">
+      <!-- <div v-for="keep in keeps" :key="keep.id" class="col-6 col-md-3">
         <KeepsComponent />
-      </div>
+      </div> -->
     </section>
   </div>
   <EditAccountModal />
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState';
 import KeepsComponent from '../components/KeepsComponent.vue';
 import EditAccountModal from '../components/EditAccountModal.vue';
+import Pop from '../utils/Pop';
+import { accountService } from '../services/AccountService';
+import VaultsComponent from '../components/VaultsComponent.vue';
 export default {
   setup() {
+    onMounted(() => {
+      getMyVaults()
+    })
+
+    async function getMyVaults() {
+      try {
+        await accountService.getMyVaults()
+      } catch (error) {
+        Pop.error(error)
+      }
+    }
+
     return {
       account: computed(() => AppState.account),
       vaults: computed(() => AppState.vaults),
       keeps: computed(() => AppState.keeps)
     };
   },
-  components: { KeepsComponent, EditAccountModal }
+  components: { KeepsComponent, EditAccountModal, VaultsComponent }
 }
 </script>
 
