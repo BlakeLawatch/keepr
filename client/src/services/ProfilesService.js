@@ -10,7 +10,7 @@ class ProfilesService {
     async getProfiles(profileId) {
         const res = await api.get(`api/profiles/${profileId}`)
         AppState.profiles = new Profile(res.data)
-        logger.log('got profiles FINISH IN THE SERVICE', res.data)
+        logger.log('got profiles FINISH IN THE SERVICE', AppState.profiles)
     }
 
     async getUsersKeeps(profileId) {

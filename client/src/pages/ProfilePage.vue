@@ -2,8 +2,8 @@
     <div v-if="profile" class="container">
         <section class="row justify-content-center">
             <div class="col-6 text-center">
-                <img :src="profile.coverImg" alt="">
-                <img :src="profile.picture" alt="">
+                <img class="img-fluid height" :src="profile.coverImg" alt="">
+                <img class="img-fluid height" :src="profile.picture" alt="">
                 <p>{{ profile.name }}</p>
 
             </div>
@@ -12,6 +12,7 @@
             <h1>Vaults</h1>
             <div v-for="profileVault in profileVaults" :key="profileVault.id"
                 class="col-8 col-md-2 text-center bg-img-vaults">
+                <img class="img-fluid" :src="profileVault.img" alt="">
                 <router-link :to="{ name: 'Vault', params: { vaultId: profileVault.id } }">
                     {{ profileVault.name }}
                 </router-link>
@@ -21,6 +22,7 @@
             <h1>Keeps</h1>
             <div v-for="keep in keeps" :key="keep.id" class="col-8 col-md-2 text-center">
                 <div class="bg-img">
+                    <img class="img-fluid" :src="keep.img" alt="">
                     {{ keep.name }}
 
                 </div>
@@ -103,5 +105,9 @@ export default {
     background-position: center;
     background-size: cover;
     height: 20vh;
+}
+
+.height {
+    max-height: 10vh;
 }
 </style>

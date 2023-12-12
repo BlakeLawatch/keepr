@@ -65,6 +65,6 @@ export default {
 
 <style scoped lang="scss">
 .masonry {
-  columns: 200px;
+  columns: 400px;
 }
 </style>

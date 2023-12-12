@@ -5,6 +5,7 @@ import { api } from "./AxiosService"
 import Pop from '../utils/Pop';
 import { Vault } from "../models/Vault";
 import { VaultKeep } from "../models/VaultKeep";
+import { KeepsInVault } from "../models/KeepsInVault";
 
 class KeepsService {
 
@@ -30,7 +31,7 @@ class KeepsService {
         if (!wantsToDelete) {
             return
         }
-        const res = api.delete(`api/keeps/${keepId}`)
+        const res = await api.delete(`api/keeps/${keepId}`)
         const index = AppState.keeps.findIndex(keep => keep.id == keepId)
         AppState.keeps.splice(index, 1)
         AppState.activeKeep = null
@@ -40,8 +41,15 @@ class KeepsService {
 
     async getKeepByVaultId(vaultId) {
         const res = await api.get(`api/vaults/${vaultId}/keeps`)
-        AppState.vaultKeeps = res.data.map(pojo => new VaultKeep(pojo))
+        AppState.keepsInVault = res.data.map(pojo => new KeepsInVault(pojo))
         logger.log('got keeps by vaultID FINISH IN THE SERVICE', res.data)
+    }
+
+    async destroyKeepFromVault(vaultKeepId) {
+        const res = await api.delete(`api/vaultKeeps/${vaultKeepId}`)
+        const index = AppState.keepsInVault.findIndex(vaultKeep => vaultKeep.id = vaultKeepId)
+        AppState.keepsInVault.splice(index, 1)
+        // logger.log('got keep out of vault', res.data)
     }
 }
 

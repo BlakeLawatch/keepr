@@ -10,13 +10,14 @@ public class ProfilesRepository
         _db = db;
     }
 
-    internal Profile GetusersProfile(string profileId)
+    internal Profile GetUsersProfile(string profileId)
     {
         string sql = @"SELECT * 
         FROM accounts
+        WHERE id = @ProfileId
         ;";
 
-        Profile profile = _db.Query<Profile>(sql, profileId).FirstOrDefault();
-        return profile;
+        Profile profiles = _db.Query<Profile>(sql, new { profileId }).FirstOrDefault();
+        return profiles;
     }
 }

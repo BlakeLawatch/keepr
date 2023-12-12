@@ -58,6 +58,7 @@ import { Vault } from '../models/Vault';
 import { vaultsService } from '../services/VaultsService';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
+import { Modal } from 'bootstrap';
 
 
 export default {
@@ -77,6 +78,7 @@ export default {
                     logger.log('Vault ID is:', editable.value)
 
                     vaultsService.createVaultKeep(vaultKeepData)
+                    Modal.getOrCreateInstance('#keepModal').hide()
 
                 } catch (error) {
                     Pop.error(error)

@@ -7,17 +7,27 @@
                     <p class="text-light fw-bold fs-6">By {{ activeVault.creator.name }}</p>
                 </div>
             </div>
-            <div class="col-6 col-md-3">
-                {{ vaultKeeps }}
+        </section>
+        <section class="row">
+            <h3>Keeps</h3>
+            <div class="col-6 col-md-3 bg-keep" v-for="keepsInVault in keepsInVaults" :key="keepsInVault.id">
+                <img class="img-fluid" :src="keepsInVault.img" alt="">
+                <p>{{ keepsInVault.name }}</p>
+                <button v-if="activeVault.creatorId = account.id" class="btn btn-outline-danger"
+                    @click="destroyKeepFromVault(keepsInVault.vaultKeepId)">Delete from
+                    Vault</button>
 
             </div>
+
+
+
         </section>
     </div>
 </template>
 
 
 <script>
-import { computed, onMounted } from 'vue';
+import { computed, watch } from 'vue';
 import { vaultsService } from '../services/VaultsService';
 import Pop from '../utils/Pop';
 import { useRoute, useRouter } from 'vue-router';
@@ -29,7 +39,7 @@ export default {
     setup() {
         const route = useRoute()
         const router = useRouter()
-        onMounted(() => {
+        watch(() => {
             getVaultById()
             getKeepByVaultId()
         })
@@ -48,15 +58,35 @@ export default {
         }
 
         async function getKeepByVaultId() {
-            const vaultId = route.params.vaultId
-            keepsService.getKeepByVaultId(vaultId)
+            try {
+                const vaultId = route.params.vaultId
+                keepsService.getKeepByVaultId(vaultId)
+
+            } catch (error) {
+                Pop.error(error)
+            }
         }
+
 
 
         return {
             activeVault: computed(() => AppState.activeVault),
-            vaultKeeps: computed(() => AppState.vaultKeeps),
-            coverImg: computed(() => `url(${AppState.activeVault?.img})`)
+            keepsInVaults: computed(() => AppState.keepsInVault),
+            coverImg: computed(() => `url(${AppState.activeVault?.img})`),
+            keepImg: computed(() => `url(${AppState.keepsInVault?.img})`),
+            account: computed(() => AppState.account),
+
+            async destroyKeepFromVault(vaultKeepId) {
+                try {
+                    const wantsToDelete = await Pop.confirm("You sure you want to delete this keep out of your vault?")
+                    if (!wantsToDelete) {
+                        return
+                    }
+                    await keepsService.destroyKeepFromVault(vaultKeepId)
+                } catch (error) {
+                    Pop.error(error)
+                }
+            }
         }
     }
 };
@@ -66,6 +96,14 @@ export default {
 <style lang="scss" scoped>
 .bg-img {
     background-image: v-bind(coverImg);
+    background-position: center;
+    background-size: cover;
+    height: 20vh;
+
+}
+
+.bg-keep {
+    background-image: v-bind(keepImg);
     background-position: center;
     background-size: cover;
     height: 20vh;

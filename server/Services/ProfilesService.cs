@@ -12,7 +12,7 @@ public class ProfilesService
 
     internal Profile GetUsersProfile(string profileId)
     {
-        Profile profile = _repo.GetusersProfile(profileId);
+        Profile profile = _repo.GetUsersProfile(profileId);
         return profile;
     }
 }
