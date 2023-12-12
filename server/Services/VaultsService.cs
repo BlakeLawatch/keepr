@@ -66,12 +66,16 @@ public class VaultsService
         {
             throw new Exception("You can't go there...");
         }
+
         return vault;
     }
 
     internal List<Vault> GetVaultsByProfileId(string profileId)
     {
+
         List<Vault> vaults = _repo.GetVaultsByProfileId(profileId);
+        vaults = vaults.FindAll(vault => vault.IsPrivate == false || vault.CreatorId != profileId);
+
         return vaults;
     }
 }

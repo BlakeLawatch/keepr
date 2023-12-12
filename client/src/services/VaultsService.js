@@ -19,6 +19,18 @@ class VaultsService {
         logger.log('deleted vault FINISH IN THE SERVICE', res.data)
     }
 
+    async getVaultById(vaultId) {
+        const res = await api.get(`api/vaults/${vaultId}`)
+        AppState.activeVault = new Vault(res.data)
+        logger.log('got vault by ID FINISH IN THE SERVICE', res.data)
+    }
+
+    async createVaultKeep(vaultKeepData) {
+        const res = await api.post(`api/vaultkeeps`, vaultKeepData)
+        AppState.vaultKeeps = new VAult
+        logger.log('created vaultKeep FINISH IN THE SERVICE', res.data)
+    }
+
 }
 
 export const vaultsService = new VaultsService()

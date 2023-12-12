@@ -14,8 +14,11 @@
       </div>
     </section>
     <section class="row">
-      <div v-for="keep in keeps" :key="keep.id" class="col-6 col-md-3">
-        <KeepsComponent :keep="keep" />
+      <div class="masonry">
+        <div v-for="keep in keeps" :key="keep.id" class="col-6 col-md-3 w-100">
+          <KeepsComponent :keep="keep" />
+        </div>
+
       </div>
 
     </section>
@@ -56,8 +59,12 @@ export default {
 
     };
   },
-  components: { KeepsComponent, ActiveKeepModal, CreateVaultModal, CreateKeepModal }
+  components: { ActiveKeepModal, CreateVaultModal, CreateKeepModal, KeepsComponent }
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.masonry {
+  columns: 200px;
+}
+</style>

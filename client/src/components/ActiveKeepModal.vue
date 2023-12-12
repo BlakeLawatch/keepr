@@ -19,10 +19,17 @@
                                     <p>{{ activeKeep.description }}</p>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <div class="d-flex">
-                                        <p class="mb-0">plants</p>
-                                        <button class="btn">save</button>
-                                    </div>
+                                    <form @submit.prevent="createVaultKeep()">
+                                        <div class="mb-3 text-start">
+                                            <label for="vaultId" class="form-label"></label>
+                                            <select v-model="editable.vaultId" id="vaultId" class="form-select">
+                                                <option v-for="vault in vaults" :key="vault.id" :value="vault.id">
+                                                    {{ vault.name }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </form>
                                     <div class="d-flex">
                                         <router-link @click.stop
                                             :to="{ name: 'Profile', params: { profileId: activeKeep.creatorId } }">
@@ -45,14 +52,39 @@
 
 
 <script>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { AppState } from '../AppState';
+import { Vault } from '../models/Vault';
+import { vaultsService } from '../services/VaultsService';
+import { logger } from '../utils/Logger';
+import Pop from '../utils/Pop';
 
 
 export default {
+
     setup() {
+        const editable = ref({})
+
         return {
-            activeKeep: computed(() => AppState.activeKeep)
+            editable,
+            vaults: computed(() => AppState.vaults),
+            activeKeep: computed(() => AppState.activeKeep),
+
+            async createVaultKeep() {
+                try {
+                    const vaultKeepData = editable.value
+                    vaultKeepData.keepId = AppState.activeKeep.id
+                    logger.log('Vault ID is:', editable.value)
+
+                    vaultsService.createVaultKeep(vaultKeepData)
+
+                } catch (error) {
+                    Pop.error(error)
+                }
+            }
+
+
+
         }
     }
 };

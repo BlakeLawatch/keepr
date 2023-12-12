@@ -8,12 +8,16 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { AppState } from './AppState'
 import Navbar from './components/Navbar.vue'
+import Pop from './utils/Pop'
+import { accountService } from './services/AccountService'
 
 export default {
   setup() {
+
+
     return {
       appState: computed(() => AppState)
     }

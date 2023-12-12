@@ -9,19 +9,21 @@
       </div>
     </section>
     <section class="row">
+      <h3>Vaults</h3>
       <div v-for="vault in vaults" :key="vault.id" class="col-6 col-md-3">
         <VaultsComponent :vault="vault" />
       </div>
-      <!-- <div v-for="keep in keeps" :key="keep.id" class="col-6 col-md-3">
-        <KeepsComponent />
-      </div> -->
+      <h3>Keeps</h3>
+      <div v-for="keep in keeps" :key="keep.id" class="col-6 col-md-3">
+        <KeepsComponent :keep="keep" />
+      </div>
     </section>
   </div>
   <EditAccountModal />
 </template>
 
 <script>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { AppState } from '../AppState';
 import KeepsComponent from '../components/KeepsComponent.vue';
 import EditAccountModal from '../components/EditAccountModal.vue';
@@ -30,8 +32,9 @@ import { accountService } from '../services/AccountService';
 import VaultsComponent from '../components/VaultsComponent.vue';
 export default {
   setup() {
-    onMounted(() => {
+    watch(() => {
       getMyVaults()
+
     })
 
     async function getMyVaults() {
@@ -41,6 +44,8 @@ export default {
         Pop.error(error)
       }
     }
+
+
 
     return {
       account: computed(() => AppState.account),

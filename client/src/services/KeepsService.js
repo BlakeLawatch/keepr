@@ -3,13 +3,15 @@ import { Keep } from "../models/Keep"
 import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 import Pop from '../utils/Pop';
+import { Vault } from "../models/Vault";
+import { VaultKeep } from "../models/VaultKeep";
 
 class KeepsService {
 
     async getKeeps() {
         const res = await api.get(`api/keeps`)
         AppState.keeps = res.data.map(pojo => new Keep(pojo))
-        logger.log('got keeps FINISH IN THE SERVICE', AppState.keeps)
+        // logger.log('got keeps FINISH IN THE SERVICE', AppState.keeps)
     }
 
     setActiveKeep(keep) {
@@ -32,8 +34,14 @@ class KeepsService {
         const index = AppState.keeps.findIndex(keep => keep.id == keepId)
         AppState.keeps.splice(index, 1)
         AppState.activeKeep = null
-        logger.log('Deleted keep FINISH IN THE SERVICE', res.data)
+        // logger.log('Deleted keep FINISH IN THE SERVICE', res.data)
 
+    }
+
+    async getKeepByVaultId(vaultId) {
+        const res = await api.get(`api/vaults/${vaultId}/keeps`)
+        AppState.vaultKeeps = res.data.map(pojo => new VaultKeep(pojo))
+        logger.log('got keeps by vaultID FINISH IN THE SERVICE', res.data)
     }
 }
 
