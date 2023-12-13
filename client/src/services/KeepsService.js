@@ -6,6 +6,7 @@ import Pop from '../utils/Pop';
 import { Vault } from "../models/Vault";
 import { VaultKeep } from "../models/VaultKeep";
 import { KeepsInVault } from "../models/KeepsInVault";
+import { Logger } from "sass";
 
 class KeepsService {
 
@@ -53,12 +54,14 @@ class KeepsService {
 
     async getKeepById(keepId) {
         const res = await api.get(`api/keeps/${keepId}`)
-        // AppState.activeKeep.views++
+        AppState.activeKeep.views++
         AppState.activeKeep = new Keep(res.data)
 
 
         logger.log('Got keep by ID. FINISH IN THE SERVICE?', res.data)
     }
+
+
 
 }
 

@@ -67,19 +67,10 @@ export default {
 
     setup() {
         const editable = ref({})
-        watch(() => {
-            getKeepById
-        })
 
-        async function getKeepById() {
-            try {
 
-                const keepId = AppState.activeKeep?.id
-                await keepsService.getKeepById(keepId)
-            } catch (error) {
-                Pop.error(error)
-            }
-        }
+
+
 
         return {
             editable,
@@ -99,7 +90,8 @@ export default {
                 } catch (error) {
                     Pop.error(error)
                 }
-            }
+            },
+
 
 
 

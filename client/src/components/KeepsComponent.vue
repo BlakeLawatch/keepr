@@ -17,7 +17,7 @@ data-bs-toggle="modal" data-bs-target="#keepModal"
 
 
 <script>
-import { computed } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { Keep } from '../models/Keep';
 import { keepsService } from '../services/KeepsService';
 import { Modal } from 'bootstrap';
@@ -32,6 +32,21 @@ export default {
         keep: { type: Keep, required: true }
     },
     setup(props) {
+        onMounted(() => {
+            getKeepById
+        })
+
+        async function getKeepById() {
+            try {
+
+                const keepId = AppState.activeKeep?.id
+                await keepsService.getKeepById(keepId)
+            } catch (error) {
+                Pop.error(error)
+            }
+        }
+
+
         return {
             coverImg: computed(() => `url(${props.keep.img})`),
             account: computed(() => AppState.account),
@@ -40,6 +55,7 @@ export default {
                 keepsService.setActiveKeep(props.keep)
                 Modal.getOrCreateInstance('#keepModal').show()
             },
+
 
             async destroyKeep(keepId) {
                 try {

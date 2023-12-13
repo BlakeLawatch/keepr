@@ -4,6 +4,7 @@
 
 
 
+using System.Globalization;
 using System.Runtime.ExceptionServices;
 
 namespace keepr.Services;
@@ -79,5 +80,11 @@ public class KeepsService
     {
         List<Keep> keeps = _repo.GetKeepsByProfileId(profileId);
         return keeps;
+    }
+
+    internal Keep updateKeptCount(Keep keepData)
+    {
+        Keep keep = _repo.EditKeep(keepData);
+        return keep;
     }
 }

@@ -8,11 +8,13 @@ public class VaultKeepsService
 {
     private readonly VaultKeepsRepository _repo;
     private readonly VaultsService _vaultsService;
+    private readonly KeepsService _keepsService;
 
-    public VaultKeepsService(VaultKeepsRepository repo, VaultsService vaultsService)
+    public VaultKeepsService(VaultKeepsRepository repo, VaultsService vaultsService, KeepsService keepsService)
     {
         _repo = repo;
         _vaultsService = vaultsService;
+        _keepsService = keepsService;
     }
 
     internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepData, string userId)
@@ -27,6 +29,9 @@ public class VaultKeepsService
         // {
         //     throw new Exception("not your vault");
         // }
+        Keep keep = _keepsService.GetKeepById(vaultKeepData.KeepId, userId);
+        keep.Kept++;
+        _keepsService.updateKeptCount(keep);
 
         return vaultKeep;
     }
