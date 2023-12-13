@@ -18,7 +18,7 @@
     </section>
     <section class="row">
       <div class="masonry">
-        <div v-for="keep in keeps" :key="keep.id" class="col-6 col-md-3 w-100">
+        <div @click="getKeepById()" v-for="keep in keeps" :key="keep.id" class="col-6 col-md-3 w-100">
           <KeepsComponent :keep="keep" />
         </div>
 
@@ -48,6 +48,9 @@ export default {
     }, { immediate: true }
     );
 
+
+
+
     async function getKeeps() {
       try {
         await keepsService.getKeeps();
@@ -58,7 +61,17 @@ export default {
     }
     return {
       keeps: computed(() => AppState.keeps),
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+
+      async getKeepById() {
+        try {
+
+          const keepId = AppState.activeKeep?.id
+          await keepsService.getKeepById(keepId)
+        } catch (error) {
+          Pop.error(error)
+        }
+      }
 
     };
   },

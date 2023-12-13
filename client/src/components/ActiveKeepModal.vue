@@ -54,7 +54,7 @@
 
 
 <script>
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch, watchEffect } from 'vue';
 import { AppState } from '../AppState';
 import { vaultsService } from '../services/VaultsService';
 import { logger } from '../utils/Logger';
@@ -67,8 +67,6 @@ export default {
 
     setup() {
         const editable = ref({})
-
-
 
 
 
