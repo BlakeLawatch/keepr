@@ -27,7 +27,8 @@ class VaultsService {
 
     async createVaultKeep(vaultKeepData) {
         const res = await api.post(`api/vaultkeeps`, vaultKeepData)
-        AppState.vaultKeeps = new VAult
+        AppState.activeKeep.kept++
+        AppState.vaultKeeps = new Vault
         logger.log('created vaultKeep FINISH IN THE SERVICE', res.data)
     }
 

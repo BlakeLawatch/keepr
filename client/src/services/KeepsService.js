@@ -51,6 +51,15 @@ class KeepsService {
         AppState.keepsInVault.splice(index, 1)
         // logger.log('got keep out of vault', res.data)
     }
+
+    async getKeepById(keepId) {
+        const res = await api.get(`api/keeps/${keepId}`)
+        // AppState.activeKeep.views++
+        AppState.activeKeep = new Keep(res.data)
+
+
+        logger.log('Got keep by ID. FINISH IN THE SERVICE?', res.data)
+    }
 }
 
 export const keepsService = new KeepsService()

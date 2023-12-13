@@ -12,7 +12,7 @@
                             <div class="col-12 col-md-6">
                                 <div class="d-flex justify-content-center">
                                     <p class="me-1">{{ activeKeep.views }} <i class="mdi mdi-eye"></i></p>
-                                    <p class="ms-1">0 <i class="mdi mdi-pin"></i></p>
+                                    <p class="ms-1">{{ activeKeep.kept }} <i class="mdi mdi-pin"></i></p>
                                 </div>
                                 <div class="text-center">
                                     <h2>{{ activeKeep.name }}</h2>
@@ -52,19 +52,32 @@
 
 
 <script>
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { AppState } from '../AppState';
-import { Vault } from '../models/Vault';
 import { vaultsService } from '../services/VaultsService';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
 import { Modal } from 'bootstrap';
+import { keepsService } from '../services/KeepsService';
 
 
 export default {
 
     setup() {
         const editable = ref({})
+        watch(() => {
+            getKeepById
+        })
+
+        async function getKeepById() {
+            try {
+
+                const keepId = AppState.activeKeep?.id
+                await keepsService.getKeepById(keepId)
+            } catch (error) {
+                Pop.error(error)
+            }
+        }
 
         return {
             editable,
@@ -84,6 +97,8 @@ export default {
                     Pop.error(error)
                 }
             }
+
+
 
 
 

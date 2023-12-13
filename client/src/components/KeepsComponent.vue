@@ -1,8 +1,8 @@
 <template>
     <div @click="setActiveKeep()" class="selectable box-shadow bg-img align-items-between my-3">
         <div class="text-end">
-            <button @click.stop="destroyKeep(keep.id)" class="btn btn-danger rounded-circle"><i
-                    class="mdi mdi-close"></i></button>
+            <button v-if="keep.creatorId == account.id" @click.stop="destroyKeep(keep.id)"
+                class="btn btn-danger rounded-circle"><i class="mdi mdi-close"></i></button>
         </div>
         <div class=" my-3 d-flex justify-content-between p-2">
             <p class="mb-0 text-shadow text-light d-flex fs-4 fw-bold"> {{ keep.name }}</p>
