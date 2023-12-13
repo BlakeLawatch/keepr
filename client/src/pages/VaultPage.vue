@@ -3,12 +3,12 @@
         <section class="row justify-content-center">
             <div class="col-12 col-md-3 bg-img text-center d-flex align-items-end">
                 <div>
-                    <p class="text-light fw-bold fs-4">{{ activeVault.name }}</p>
+                    <p class="text-light fw-bold fs-4 text-shadow">{{ activeVault.name }}</p>
                     <p class="text-light fw-bold fs-6">By {{ activeVault.creator.name }}</p>
                 </div>
             </div>
             <div class="text-center">
-                <p class="fw-bold fs-3">{{ keepsInVaults.length }} Keeps</p>
+                <p class="fw-bold fs-3">{{ keepsInVaults?.length }} Keeps</p>
 
             </div>
         </section>
@@ -112,6 +112,9 @@ export default {
     background-position: center;
     background-size: cover;
     height: 20vh;
+}
 
+.text-shadow {
+    text-shadow: 1px 1px 2px black;
 }
 </style>

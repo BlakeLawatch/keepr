@@ -39,6 +39,7 @@
 import { ref } from 'vue';
 import { keepsService } from '../services/KeepsService';
 import { Modal } from 'bootstrap';
+import Pop from '../utils/Pop';
 
 
 export default {
@@ -48,10 +49,15 @@ export default {
             editable,
 
             async createKeep() {
-                const keepData = editable.value
-                keepsService.createKeep(keepData)
-                editable.value = {}
-                Modal.getOrCreateInstance('#createKeep').hide()
+                try {
+                    const keepData = editable.value
+                    keepsService.createKeep(keepData)
+                    editable.value = {}
+                    Modal.getOrCreateInstance('#createKeep').hide()
+
+                } catch (error) {
+                    Pop.error(error)
+                }
             }
         }
     }

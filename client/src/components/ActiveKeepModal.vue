@@ -83,10 +83,10 @@ export default {
                     const vaultKeepData = editable.value
                     vaultKeepData.keepId = AppState.activeKeep.id
                     logger.log('Vault ID is:', editable.value)
-
-                    vaultsService.createVaultKeep(vaultKeepData)
-                    Modal.getOrCreateInstance('#keepModal').hide()
                     Pop.success("Your keep has been kept")
+
+                    await vaultsService.createVaultKeep(vaultKeepData)
+                    Modal.getOrCreateInstance('#keepModal').hide()
 
 
                 } catch (error) {
