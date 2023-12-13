@@ -54,7 +54,7 @@
 
 
 <script>
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { AppState } from '../AppState';
 import { vaultsService } from '../services/VaultsService';
 import { logger } from '../utils/Logger';
@@ -83,7 +83,7 @@ export default {
 
         return {
             editable,
-            vaults: computed(() => AppState.vaults),
+            vaults: computed(() => AppState.accountVaults),
             activeKeep: computed(() => AppState.activeKeep),
             account: computed(() => AppState.account),
 
