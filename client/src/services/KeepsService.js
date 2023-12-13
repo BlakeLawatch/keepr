@@ -53,9 +53,13 @@ class KeepsService {
 
     async destroyKeepFromVault(vaultKeepId) {
         const res = await api.delete(`api/vaultKeeps/${vaultKeepId}`)
-        const index = AppState.keepsInVault.findIndex(vaultKeep => vaultKeep.id = vaultKeepId)
+        const index = AppState.keepsInVault.findIndex(keep => keep.vaultKeepId == vaultKeepId)
+        logger.log('got keep out of vault', index)
+        if (index == -1) {
+            return
+        }
         AppState.keepsInVault.splice(index, 1)
-        // logger.log('got keep out of vault', res.data)
+
     }
 
     async getKeepById(keepId) {
