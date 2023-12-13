@@ -5,9 +5,18 @@
                 <div>
                     <img class="img-fluid height" :src="profile.coverImg" alt="">
                 </div>
-                <img class="img-fluid height rounded-circle" :src="profile.picture" alt="">
+                <div>
+                    <img class="img-fluid height rounded-circle" :src="profile.picture" alt="">
 
-                <p class="fs-2">{{ profile.name }}</p>
+                    <p class="fs-2">{{ profile.name }}</p>
+
+                </div>
+                <div class="d-flex justify-content-center fw-bold">
+                    <p>{{ profileVaults.length }} Vaults</p>
+                    <p class="mx-2">|</p>
+                    <p>{{ keeps.length }} Keeps</p>
+
+                </div>
 
             </div>
         </section>
@@ -89,8 +98,8 @@ export default {
         return {
             profile: computed(() => AppState.profiles),
             keeps: computed(() => AppState.profileKeeps),
-            profileVaults: computed(() => AppState.profileVaults),
-            // coverImg: (() => `url(${AppState.profileKeeps?.img})`),
+            profileVaults: computed(() => AppState.profileVaults.filter(profileVaults => profileVaults.isPrivate == false)),
+            coverImg: (() => `url(${AppState.profileKeeps.img})`),
             // coverImgVaults: (() => `url(${AppState.profileVaults?.img})`)
         };
     },
@@ -100,12 +109,12 @@ export default {
 
 
 <style lang="scss" scoped>
-// .bg-img {
-//     background-image: v-bind(coverImg);
-//     background-position: center;
-//     background-size: cover;
-//     height: 20vh;
-// }
+.bg-img {
+    background-image: v-bind(coverImg);
+    background-position: center;
+    background-size: cover;
+    height: 20vh;
+}
 
 // .bg-img-vaults {
 //     background-image: v-bind(coverImgVaults);

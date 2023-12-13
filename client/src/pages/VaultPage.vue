@@ -7,13 +7,17 @@
                     <p class="text-light fw-bold fs-6">By {{ activeVault.creator.name }}</p>
                 </div>
             </div>
+            <div class="text-center">
+                <p class="fw-bold fs-3">{{ keepsInVaults.length }} Keeps</p>
+
+            </div>
         </section>
         <section class="row">
             <h3>Keeps</h3>
             <div class="col-6 col-md-3 bg-keep" v-for="keepsInVault in keepsInVaults" :key="keepsInVault.id">
                 <img class="img-fluid" :src="keepsInVault.img" alt="">
                 <p>{{ keepsInVault.name }}</p>
-                <button v-if="activeVault.creatorId = account.id" class="btn btn-outline-danger"
+                <button v-if="activeVault.creatorId == account.id" class="btn btn-outline-danger"
                     @click="destroyKeepFromVault(keepsInVault.vaultKeepId)">Delete from
                     Vault</button>
 

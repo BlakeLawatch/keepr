@@ -15,6 +15,11 @@
               class="mdi mdi-dots-horizontal"></i></button>
 
         </div>
+        <div class="d-flex justify-content-center fw-bold">
+          <p> {{ vaults.length }} Vaults</p>
+          <p class="mx-2">|</p>
+          <p>{{ keeps.length }} Keeps</p>
+        </div>
       </div>
     </section>
     <section class="row">

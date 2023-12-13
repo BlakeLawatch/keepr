@@ -54,6 +54,9 @@ public class VaultKeepsService
             throw new Exception("Not your VaultKeep to delete");
         }
         _repo.DestroyVaultKeep(vaultKeepId);
+
+
+
         return "This vault keep has been deleted";
     }
 

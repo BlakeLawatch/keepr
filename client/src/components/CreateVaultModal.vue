@@ -10,16 +10,18 @@
                     <form @submit.prevent="createVault()">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input v-model="editable.name" type="text" maxLength="50" class="form-control" id="name">
+                            <input v-model="editable.name" type="text" maxLength="50" class="form-control" required
+                                id="name">
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
-                            <input v-model="editable.description" type="text" maxLength="500" class="form-control"
+                            <input v-model="editable.description" type="text" maxLength="500" class="form-control" required
                                 id="description">
                         </div>
                         <div class="mb-3">
                             <label for="img" class="form-label">Image</label>
-                            <input v-model="editable.img" type="text" maxLength="500" class="form-control" id="img">
+                            <input v-model="editable.img" type="text" maxLength="500" class="form-control" required
+                                id="img">
                         </div>
                         <div class="mb-3">
                             <label for="isPrivate" class="form-label">Private?</label>
@@ -41,6 +43,7 @@
 import { ref } from 'vue';
 import { vaultsService } from '../services/VaultsService.js'
 import { Modal } from 'bootstrap';
+import Pop from '../utils/Pop';
 
 export default {
     setup() {
@@ -49,10 +52,15 @@ export default {
             editable,
 
             async createVault() {
-                const vaultData = editable.value
-                vaultsService.createVault(vaultData)
-                editable.value = {}
-                Modal.getOrCreateInstance('#createVault').hide()
+                try {
+                    const vaultData = editable.value
+                    vaultsService.createVault(vaultData)
+                    editable.value = {}
+                    Modal.getOrCreateInstance('#createVault').hide()
+
+                } catch (error) {
+                    Pop.error(error)
+                }
             }
         }
     }

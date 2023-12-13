@@ -1,14 +1,15 @@
 <template>
     <div class="bg-img col-12 my-2 box-shadow">
         <div class="text-end">
-            <button @click="destroyVault(vault.id)" class="btn btn-danger rounded-circle fs-6"><i
+            <button title="Delete this vault" @click="destroyVault(vault.id)" class="btn btn-danger rounded-circle fs-6"><i
                     class="mdi mdi-close"></i></button>
         </div>
         <div class="d-flex align-items-end justify-content-around">
             <router-link :to="{ name: 'Vault', params: { vaultId: vault.id } }">
                 <h3 class="selectable text-shadow text-light" :title="vault.name">{{ vault.name }}</h3>
             </router-link>
-            <p class="mb-0 fs-2 text-light text-shadow" v-if="vault.isPrivate"><i class="mdi mdi-lock-outline"></i></p>
+            <p title="This vault is private" class="mb-0 fs-2 text-light text-shadow" v-if="vault.isPrivate"><i
+                    class="mdi mdi-lock-outline"></i></p>
 
         </div>
     </div>

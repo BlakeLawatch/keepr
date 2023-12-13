@@ -86,9 +86,17 @@ export default {
 
                     vaultsService.createVaultKeep(vaultKeepData)
                     Modal.getOrCreateInstance('#keepModal').hide()
+                    Pop.success("Your keep has been kept")
+
 
                 } catch (error) {
                     Pop.error(error)
+                    // if (error.response.data.includes("Duplicate entry")) {
+                    //     Pop.error("You already have that keep kept in that vault")
+                    // }
+
+
+
                 }
             },
 

@@ -4,6 +4,7 @@ import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 import { Keep } from "../models/Keep";
 import { accountService } from "./AccountService";
+import Pop from "../utils/Pop";
 
 class VaultsService {
 
@@ -32,8 +33,9 @@ class VaultsService {
 
     async createVaultKeep(vaultKeepData) {
         const res = await api.post(`api/vaultkeeps`, vaultKeepData)
+
         AppState.activeKeep.kept++
-        AppState.activeKeep.push(new Keep(res.data))
+        // AppState.activeKeep.push(new Keep(res.data))
         logger.log('created vaultKeep FINISH IN THE SERVICE', res.data)
     }
 

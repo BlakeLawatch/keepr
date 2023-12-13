@@ -10,15 +10,17 @@
                     <form @submit.prevent="createKeep()">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input v-model="editable.name" type="text" class="form-control" id="name" maxlength="50">
+                            <input v-model="editable.name" type="text" class="form-control" id="name" maxlength="50"
+                                required>
                         </div>
                         <div class="mb-3">
                             <label for="Image URL" class="form-label">Image URL</label>
-                            <input v-model="editable.img" type="url" class="form-control" id="Image URL" maxlength="1000">
+                            <input v-model="editable.img" type="url" class="form-control" id="Image URL" maxlength="1000"
+                                required>
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
-                            <input v-model="editable.description" type="text" class="form-control" id="description"
+                            <input v-model="editable.description" type="text" class="form-control" id="description" required
                                 maxlength="500">
                         </div>
                         <div class="modal-footer">

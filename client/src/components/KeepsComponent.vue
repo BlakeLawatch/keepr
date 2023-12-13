@@ -2,12 +2,12 @@
     <div @click="setActiveKeep()" class="selectable box-shadow bg-img align-items-between my-3" :title="keep.name">
         <div class="text-end">
             <button v-if="keep.creatorId == account.id" @click.stop="destroyKeep(keep.id)"
-                class="btn btn-danger rounded-circle"><i class="mdi mdi-close"></i></button>
+                class="btn btn-danger rounded-circle font"><i class="mdi mdi-close" title="Delete this Keep"></i></button>
         </div>
         <div class=" my-3 d-flex justify-content-between p-2">
             <p class="mb-0 text-shadow text-light d-flex fs-4 fw-bold"> {{ keep.name }}</p>
             <router-link @click.stop :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
-                <img class="img-fluid profile" :src="keep.creator.picture" alt="" :title="keep.creator.name">
+                <img class="img-fluid profile" :src="keep.creator.picture" alt="Creator Profile" :title="keep.creator.name">
 
             </router-link>
         </div>
@@ -17,7 +17,7 @@ data-bs-toggle="modal" data-bs-target="#keepModal"
 
 
 <script>
-import { computed, onMounted, watch, watchEffect } from 'vue';
+import { computed } from 'vue';
 import { Keep } from '../models/Keep';
 import { keepsService } from '../services/KeepsService';
 import { Modal } from 'bootstrap';
@@ -32,18 +32,6 @@ export default {
         keep: { type: Keep, required: true }
     },
     setup(props) {
-        // watch(() => {
-        //     getKeepById()
-        // })
-
-        // async function getKeepById() {
-        //     try {
-        //         await keepsService.getKeepById()
-        //     } catch (error) {
-        //         Pop.error(error)
-        //     }
-        // }
-
 
         return {
             coverImg: computed(() => `url(${props.keep.img})`),
