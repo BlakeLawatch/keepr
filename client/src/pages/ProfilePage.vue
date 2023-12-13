@@ -2,16 +2,18 @@
     <div v-if="profile" class="container">
         <section class="row justify-content-center">
             <div class="col-6 text-center">
-                <img class="img-fluid height" :src="profile.coverImg" alt="">
-                <img class="img-fluid height" :src="profile.picture" alt="">
-                <p>{{ profile.name }}</p>
+                <div>
+                    <img class="img-fluid height" :src="profile.coverImg" alt="">
+                </div>
+                <img class="img-fluid height rounded-circle" :src="profile.picture" alt="">
+
+                <p class="fs-2">{{ profile.name }}</p>
 
             </div>
         </section>
         <section class="row justify-content-center">
             <h1>Vaults</h1>
-            <div v-for="profileVault in profileVaults" :key="profileVault.id"
-                class="col-8 col-md-2 text-center bg-img-vaults">
+            <div v-for="profileVault in profileVaults" :key="profileVault.id" class="col-8 col-md-2 text-center">
                 <img class="img-fluid" :src="profileVault.img" alt="">
                 <router-link :to="{ name: 'Vault', params: { vaultId: profileVault.id } }">
                     {{ profileVault.name }}
@@ -19,9 +21,9 @@
             </div>
         </section>
         <section class="row justify-content-center">
-            <h1>Keeps</h1>
+            <h1 class="my-5 my-2">Keeps</h1>
             <div v-for="keep in keeps" :key="keep.id" class="col-8 col-md-2 text-center">
-                <div class="bg-img">
+                <div>
                     <img class="img-fluid" :src="keep.img" alt="">
                     {{ keep.name }}
 
@@ -84,8 +86,8 @@ export default {
             profile: computed(() => AppState.profiles),
             keeps: computed(() => AppState.profileKeeps),
             profileVaults: computed(() => AppState.profileVaults),
-            coverImg: (() => `url(${AppState.profileKeeps?.img})`),
-            coverImgVaults: (() => `url(${AppState.profileVaults?.img})`)
+            // coverImg: (() => `url(${AppState.profileKeeps?.img})`),
+            // coverImgVaults: (() => `url(${AppState.profileVaults?.img})`)
         };
     },
 };
@@ -93,19 +95,19 @@ export default {
 
 
 <style lang="scss" scoped>
-.bg-img {
-    background-image: v-bind(coverImg);
-    background-position: center;
-    background-size: cover;
-    height: 20vh;
-}
+// .bg-img {
+//     background-image: v-bind(coverImg);
+//     background-position: center;
+//     background-size: cover;
+//     height: 20vh;
+// }
 
-.bg-img-vaults {
-    background-image: v-bind(coverImgVaults);
-    background-position: center;
-    background-size: cover;
-    height: 20vh;
-}
+// .bg-img-vaults {
+//     background-image: v-bind(coverImgVaults);
+//     background-position: center;
+//     background-size: cover;
+//     height: 20vh;
+// }
 
 .height {
     max-height: 10vh;

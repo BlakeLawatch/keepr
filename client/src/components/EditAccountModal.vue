@@ -10,15 +10,16 @@
                     <form @submit.prevent="editAccount()">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input v-model="editable.name" type="text" class="form-control" id="name">
+                            <input v-model="editable.name" type="text" class="form-control" id="name" maxLength="255">
                         </div>
                         <div class="mb-3">
                             <label for="picture" class="form-label">Picture</label>
-                            <input v-model="editable.picture" type="url" class="form-control" id="picture">
+                            <input v-model="editable.picture" type="url" class="form-control" id="picture" maxlength="255">
                         </div>
                         <div class="mb-3">
                             <label for="coverImg" class="form-label">Cover Image</label>
-                            <input v-model="editable.coverImg" type="url" class="form-control" id="coverImg">
+                            <input v-model="editable.coverImg" type="url" class="form-control" id="coverImg"
+                                maxlength="1000">
                         </div>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save changes</button>

@@ -1,15 +1,18 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <section v-if="account.id" class="row justify-content-center">
-      <div class="col-2">
-        <button class="mx-1" data-bs-toggle="modal" data-bs-target="#createKeep">Create Keep</button>
-        <button class="mx-1" data-bs-toggle="modal" data-bs-target="#createVault">Create Vault</button>
-        <!-- <form>
+      <div class="col-3 d-flex my-2">
+        <button class="rounded-pill mx-1 btn-outline" data-bs-toggle="modal" data-bs-target="#createKeep">Create
+          Keep</button>
+        <button class="rounded-pill mx-1 btn-outline" data-bs-toggle="modal" data-bs-target="#createVault">Create
+          Vault</button>
+        <!-- <form class="my-3">
           <label for="option" class="form-label"></label>
           <select name="" id="" class="form-select">
             <option data-bs-toggle="modal" data-bs-target="#createKeep" value="">New Keep</option>
             <option data-bs-toggle="modal" data-bs-target="#createVault" value="">New Vault</option>
           </select>
+          <button type="submit">Go</button>
         </form> -->
       </div>
     </section>
@@ -65,6 +68,6 @@ export default {
 
 <style scoped lang="scss">
 .masonry {
-  columns: 400px;
+  columns: 300px;
 }
 </style>

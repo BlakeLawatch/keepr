@@ -3,6 +3,8 @@ import { Vault } from "../models/Vault"
 import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 import Pop from '../utils/Pop';
+import { VaultKeep } from "../models/VaultKeep";
+import { Keep } from "../models/Keep";
 
 class VaultsService {
 
@@ -28,8 +30,13 @@ class VaultsService {
     async createVaultKeep(vaultKeepData) {
         const res = await api.post(`api/vaultkeeps`, vaultKeepData)
         AppState.activeKeep.kept++
-        AppState.vaultKeeps = new Vault
+        AppState.activeKeep.push(new Keep(res.data))
         logger.log('created vaultKeep FINISH IN THE SERVICE', res.data)
+    }
+
+    clearAppState() {
+        AppState.activeVault = null
+        AppState.keepsInVault = null
     }
 
 }

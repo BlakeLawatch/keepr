@@ -16,7 +16,6 @@ class KeepsService {
     }
 
     setActiveKeep(keep) {
-
         AppState.activeKeep = keep
     }
 
@@ -60,6 +59,7 @@ class KeepsService {
 
         logger.log('Got keep by ID. FINISH IN THE SERVICE?', res.data)
     }
+
 }
 
 export const keepsService = new KeepsService()

@@ -42,6 +42,7 @@ export default {
         watch(() => {
             getVaultById()
             getKeepByVaultId()
+            vaultsService.clearAppState()
         })
 
         async function getVaultById() {

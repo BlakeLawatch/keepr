@@ -1,19 +1,29 @@
 <template>
   <div class="container">
-    <section class="row">
-      <div class="col-12">
-        <button data-bs-toggle="modal" data-bs-target="#editAccountModal" class="btn">Edit Account</button>
-        <img :src="account.coverImg" alt="">
-        <img :src="account.picture" alt="">
-        <p>{{ account.name }}</p>
+    <section class="row justify-content-center">
+      <div class="col-6 text-center">
+        <div>
+          <img class="cover-img" :src="account.coverImg" alt="">
+        </div>
+        <div>
+          <img class="rounded-circle" :src="account.picture" alt="">
+
+        </div>
+        <div class="d-flex justify-content-around">
+          <h2>{{ account.name }}</h2>
+          <button data-bs-toggle="modal" data-bs-target="#editAccountModal" class="btn fs-2" title="Edit Account"><i
+              class="mdi mdi-dots-horizontal"></i></button>
+
+        </div>
       </div>
     </section>
     <section class="row">
       <h3>Vaults</h3>
       <div v-for="vault in vaults" :key="vault.id" class="col-6 col-md-3">
+        <!-- {{ vault.description }} -->
         <VaultsComponent :vault="vault" />
       </div>
-      <h3>Keeps</h3>
+      <h3 class="mt-5 mb-2">Keeps</h3>
       <div v-for="keep in keeps" :key="keep.id" class="col-6 col-md-3">
         <KeepsComponent :keep="keep" />
       </div>
@@ -23,18 +33,18 @@
 </template>
 
 <script>
-import { computed, onMounted, watch } from 'vue';
+import { computed, watch } from 'vue';
 import { AppState } from '../AppState';
 import KeepsComponent from '../components/KeepsComponent.vue';
 import EditAccountModal from '../components/EditAccountModal.vue';
 import Pop from '../utils/Pop';
 import { accountService } from '../services/AccountService';
 import VaultsComponent from '../components/VaultsComponent.vue';
+
 export default {
   setup() {
     watch(() => {
       getMyVaults()
-
     })
 
     async function getMyVaults() {
@@ -47,10 +57,13 @@ export default {
 
 
 
+
+
     return {
       account: computed(() => AppState.account),
-      vaults: computed(() => AppState.vaults),
+      vaults: computed(() => AppState.accountVaults),
       keeps: computed(() => AppState.keeps)
+      // keeps: computed(() => AppState.keeps.find(keeps => keeps.creatorId == AppState.account?.id))
     };
   },
   components: { KeepsComponent, EditAccountModal, VaultsComponent }
@@ -58,6 +71,13 @@ export default {
 </script>
 
 <style scoped>
+.cover-img {
+  object-position: center;
+  object-fit: cover;
+  width: 30em;
+}
+
+
 img {
   max-width: 100px;
 }

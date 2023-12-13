@@ -22,9 +22,11 @@ class AccountService {
 
   async getMyVaults() {
     const res = await api.get(`account/vaults`)
-    AppState.vaults = res.data.map(pojo => new Vault(pojo))
-    logger.log('got vaults FINISH IN THE SERVICE', AppState.vaults)
+    AppState.accountVaults = res.data.map(pojo => new Vault(pojo))
+    logger.log('got account vaults FINISH IN THE SERVICE', AppState.accountVaults)
   }
+
+
 }
 
 export const accountService = new AccountService()
