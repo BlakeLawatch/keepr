@@ -19,11 +19,11 @@ public class VaultKeepsService
 
     internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepData, string userId)
     {
-        _vaultsService.GetVaultById(vaultKeepData.VaultId, userId);
-        // if (vaultKeepData.VaultId != vaultKeepData.Creator.)
-        // {
-        //     throw new Exception("Not your vault");
-        // }
+        Vault vault = _vaultsService.GetVaultById(vaultKeepData.VaultId, userId);
+        if (vault.CreatorId != userId)
+        {
+            throw new Exception("Not your vault");
+        }
         VaultKeep vaultKeep = _repo.CreateVaultKeep(vaultKeepData);
         // if ()
         // {

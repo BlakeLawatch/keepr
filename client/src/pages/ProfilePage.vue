@@ -14,6 +14,8 @@
         <section class="row justify-content-center">
             <h1>Vaults</h1>
             <div v-for="profileVault in profileVaults" :key="profileVault.id" class="col-8 col-md-2 text-center">
+
+
                 <img class="img-fluid" :src="profileVault.img" alt="">
                 <router-link :to="{ name: 'Vault', params: { vaultId: profileVault.id } }">
                     {{ profileVault.name }}
@@ -44,6 +46,8 @@ import { profilesService } from '../services/ProfilesService.js'
 import Pop from '../utils/Pop';
 import { useRoute } from 'vue-router';
 import { AppState } from '../AppState.js'
+
+
 
 
 
@@ -90,6 +94,7 @@ export default {
             // coverImgVaults: (() => `url(${AppState.profileVaults?.img})`)
         };
     },
+
 };
 </script>
 

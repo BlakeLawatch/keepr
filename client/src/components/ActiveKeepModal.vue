@@ -10,8 +10,10 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="d-flex justify-content-center">
-                                    <p class="me-1">{{ activeKeep.views }} <i class="mdi mdi-eye"></i></p>
-                                    <p class="ms-1">{{ activeKeep.kept }} <i class="mdi mdi-pin"></i></p>
+                                    <p title="Number of views for this Keep" class="me-2">{{ activeKeep.views }} <i
+                                            class="mdi mdi-eye"></i></p>
+                                    <p title="number of times this Keep has been kept" class="ms-2">{{ activeKeep.kept }} <i
+                                            class="mdi mdi-pin"></i></p>
                                 </div>
                                 <div class="text-center">
                                     <h2>{{ activeKeep.name }}</h2>
@@ -19,7 +21,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <form v-if="account" @submit.prevent="createVaultKeep()">
+                                        <form v-if="account.id" @submit.prevent="createVaultKeep()">
                                             <div class="mb-3 text-start">
                                                 <label for="vaultId" class="form-label"></label>
                                                 <select v-model="editable.vaultId" id="vaultId" class="form-select">
@@ -54,13 +56,13 @@
 
 
 <script>
-import { computed, onMounted, ref, watch, watchEffect } from 'vue';
+import { computed, ref } from 'vue';
 import { AppState } from '../AppState';
 import { vaultsService } from '../services/VaultsService';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
 import { Modal } from 'bootstrap';
-import { keepsService } from '../services/KeepsService';
+
 
 
 export default {

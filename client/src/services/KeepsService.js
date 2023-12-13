@@ -35,6 +35,10 @@ class KeepsService {
         const res = await api.delete(`api/keeps/${keepId}`)
         const index = AppState.keeps.findIndex(keep => keep.id == keepId)
         AppState.keeps.splice(index, 1)
+        if (index == -1) {
+            const profileIndex = AppState.profileKeeps.findIndex(profileKeep => profileKeep.id == keepId)
+            AppState.profileKeeps.splice(profileIndex, 1)
+        }
         AppState.activeKeep = null
         // logger.log('Deleted keep FINISH IN THE SERVICE', res.data)
 
