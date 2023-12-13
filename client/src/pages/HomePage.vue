@@ -34,7 +34,7 @@
 <script>
 import Pop from '../utils/Pop';
 import { keepsService } from '../services/KeepsService.js'
-import { computed, onMounted, watch, watchEffect } from 'vue';
+import { computed, watch } from 'vue';
 import { AppState } from '../AppState';
 import KeepsComponent from '../components/KeepsComponent.vue';
 import ActiveKeepModal from '../components/ActiveKeepModal.vue';

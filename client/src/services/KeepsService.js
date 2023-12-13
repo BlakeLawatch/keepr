@@ -7,6 +7,7 @@ import { Vault } from "../models/Vault";
 import { VaultKeep } from "../models/VaultKeep";
 import { KeepsInVault } from "../models/KeepsInVault";
 import { Logger } from "sass";
+import { profilesService } from "./ProfilesService";
 
 class KeepsService {
 

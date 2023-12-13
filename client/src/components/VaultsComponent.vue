@@ -37,7 +37,8 @@ export default {
                     const wantsToDelete = await Pop.confirm('You want to delete your vault?')
                     if (!wantsToDelete) {
                         return
-                    } await vaultsService.destroyVault(vaultId)
+                    }
+                    await vaultsService.destroyVault(vaultId)
                 } catch (error) {
                     Pop.error(error)
                 }

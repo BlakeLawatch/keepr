@@ -2,9 +2,8 @@ import { AppState } from "../AppState"
 import { Vault } from "../models/Vault"
 import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
-import Pop from '../utils/Pop';
-import { VaultKeep } from "../models/VaultKeep";
 import { Keep } from "../models/Keep";
+import { accountService } from "./AccountService";
 
 class VaultsService {
 
@@ -16,9 +15,13 @@ class VaultsService {
 
     async destroyVault(vaultId) {
         const res = await api.delete(`api/vaults/${vaultId}`)
-        const index = AppState.vaults.findIndex(vault => vault.id == vaultId)
+        const index = AppState.accountVaults.findIndex(accountVault => accountVault.id == vaultId)
+        logger.log('deleted vault FINISH IN THE SERVICE', index)
+        if (index == -1) {
+            return
+        }
         AppState.vaults.splice(index, 1)
-        logger.log('deleted vault FINISH IN THE SERVICE')
+        accountService.getMyVaults()
     }
 
     async getVaultById(vaultId) {
