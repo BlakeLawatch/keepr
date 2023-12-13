@@ -40,11 +40,15 @@ import EditAccountModal from '../components/EditAccountModal.vue';
 import Pop from '../utils/Pop';
 import { accountService } from '../services/AccountService';
 import VaultsComponent from '../components/VaultsComponent.vue';
+import { useRoute } from 'vue-router';
+import { profilesService } from '../services/ProfilesService';
 
 export default {
   setup() {
+    const route = useRoute()
     watch(() => {
       getMyVaults()
+      getUsersKeeps()
     })
 
     async function getMyVaults() {
@@ -52,6 +56,16 @@ export default {
         await accountService.getMyVaults()
       } catch (error) {
         Pop.error(error)
+      }
+    }
+    async function getUsersKeeps() {
+      try {
+
+        const profileId = AppState.account.id
+        await profilesService.getUsersKeeps(profileId);
+      }
+      catch (error) {
+        Pop.error(error);
       }
     }
 
@@ -62,8 +76,8 @@ export default {
     return {
       account: computed(() => AppState.account),
       vaults: computed(() => AppState.accountVaults),
-      keeps: computed(() => AppState.keeps)
-      // keeps: computed(() => AppState.keeps.find(keeps => keeps.creatorId == AppState.account?.id))
+      keeps: computed(() => AppState.profileKeeps)
+      // keeps: computed(() => AppState.keeps.filter(keeps => keeps.creatorId = AppState.account?.id))
     };
   },
   components: { KeepsComponent, EditAccountModal, VaultsComponent }
