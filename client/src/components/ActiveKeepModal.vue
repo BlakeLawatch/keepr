@@ -83,14 +83,14 @@ export default {
                     const vaultKeepData = editable.value
                     vaultKeepData.keepId = AppState.activeKeep.id
                     logger.log('Vault ID is:', editable.value)
-                    Pop.success("Your keep has been kept")
 
                     await vaultsService.createVaultKeep(vaultKeepData)
+                    Pop.success("Your keep has been kept")
                     Modal.getOrCreateInstance('#keepModal').hide()
 
 
                 } catch (error) {
-                    Pop.error(error)
+                    Pop.error("You've already kept this keep in this vault")
                     // if (error.response.data.includes("Duplicate entry")) {
                     //     Pop.error("You already have that keep kept in that vault")
                     // }

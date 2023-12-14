@@ -55,8 +55,8 @@ export default {
                 await vaultsService.getVaultById(vaultId)
 
             } catch (error) {
-                Pop.error(error);
                 if (error.response.data.includes('go there')) {
+                    Pop.error("You can't go there...");
                     router.push({ name: 'Home' })
                 }
             }
