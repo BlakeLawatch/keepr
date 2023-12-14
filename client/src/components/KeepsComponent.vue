@@ -5,7 +5,7 @@
                 class="btn btn-danger rounded-circle font"><i class="mdi mdi-close" title="Delete this Keep"></i></button>
         </div>
         <div class=" my-3 d-flex justify-content-between p-2">
-            <p class="mb-0 text-shadow text-light d-flex fs-4 fw-bold"> {{ keep.name }}</p>
+            <p class="mb-0 text-shadow text-light d-flex fs-3 fw-bold text-break"> {{ keep.name }}</p>
             <router-link @click.stop :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
                 <img class="img-fluid profile" :src="keep.creator.picture" alt="Creator Profile" :title="keep.creator.name">
 

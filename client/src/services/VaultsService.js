@@ -11,7 +11,7 @@ class VaultsService {
     async createVault(vaultData) {
         const res = await api.post(`api/vaults`, vaultData)
         AppState.vaults.push(new Vault(res.data))
-        logger.log(`createdVault FINISH IN THE SERVICE`, AppState.vaults)
+        // logger.log(`createdVault FINISH IN THE SERVICE`, AppState.vaults)
     }
 
     async destroyVault(vaultId) {
@@ -28,7 +28,7 @@ class VaultsService {
     async getVaultById(vaultId) {
         const res = await api.get(`api/vaults/${vaultId}`)
         AppState.activeVault = new Vault(res.data)
-        logger.log('got vault by ID FINISH IN THE SERVICE', res.data)
+        // logger.log('got vault by ID FINISH IN THE SERVICE', res.data)
     }
 
     async createVaultKeep(vaultKeepData) {
@@ -37,7 +37,7 @@ class VaultsService {
 
         AppState.activeKeep.kept++
         // AppState.activeKeep.push(new Keep(res.data))
-        logger.log('created vaultKeep FINISH IN THE SERVICE', res.data)
+        // logger.log('created vaultKeep FINISH IN THE SERVICE', res.data)
 
 
     }

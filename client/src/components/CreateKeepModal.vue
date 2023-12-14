@@ -10,7 +10,7 @@
                     <form @submit.prevent="createKeep()">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input v-model="editable.name" type="text" class="form-control" id="name" maxlength="50"
+                            <input v-model="editable.name" type="text" class="form-control" id="name" maxlength="35"
                                 required>
                         </div>
                         <div class="mb-3">
@@ -51,7 +51,7 @@ export default {
             async createKeep() {
                 try {
                     const keepData = editable.value
-                    keepsService.createKeep(keepData)
+                    await keepsService.createKeep(keepData)
                     editable.value = {}
                     Modal.getOrCreateInstance('#createKeep').hide()
 

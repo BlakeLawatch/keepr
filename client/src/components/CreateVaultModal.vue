@@ -54,7 +54,7 @@ export default {
             async createVault() {
                 try {
                     const vaultData = editable.value
-                    vaultsService.createVault(vaultData)
+                    await vaultsService.createVault(vaultData)
                     editable.value = {}
                     Modal.getOrCreateInstance('#createVault').hide()
 

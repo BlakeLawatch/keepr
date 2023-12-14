@@ -16,8 +16,8 @@
                                             class="mdi mdi-pin"></i></p>
                                 </div>
                                 <div class="text-center">
-                                    <h2>{{ activeKeep.name }}</h2>
-                                    <p>{{ activeKeep.description }}</p>
+                                    <h2 class="text-break">{{ activeKeep.name }}</h2>
+                                    <p class="text-break">{{ activeKeep.description }}</p>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <div>

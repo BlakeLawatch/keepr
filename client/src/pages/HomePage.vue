@@ -83,4 +83,10 @@ export default {
 .masonry {
   columns: 300px;
 }
+
+@media (max-width: 845px) {
+  .masonry {
+    columns: 200px
+  }
+}
 </style>
