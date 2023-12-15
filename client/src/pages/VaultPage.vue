@@ -20,7 +20,6 @@
                 <button v-if="activeVault.creatorId == account.id" class="btn btn-outline-danger"
                     @click="destroyKeepFromVault(keepsInVault.vaultKeepId)">Delete from
                     Vault</button>
-
             </div>
 
 

@@ -2,24 +2,24 @@
   <div class="container">
     <section class="row justify-content-center">
       <div class="col-6 text-center">
-        <div>
-          <img class="cover-img" :src="account.coverImg" alt="">
-        </div>
-        <div>
-          <img class="rounded-circle" :src="account.picture" alt="">
+        <div class="relative mb-5">
+          <img class="cover-img rounded" :src="account.coverImg" alt="">
+          <div class="centered">
+            <img class="rounded-circle picture" :src="account.picture" alt="">
 
+          </div>
         </div>
-        <div class="d-flex justify-content-around">
-          <h2>{{ account.name }}</h2>
-          <button data-bs-toggle="modal" data-bs-target="#editAccountModal" class="btn fs-2" title="Edit Account"><i
-              class="mdi mdi-dots-horizontal"></i></button>
+      </div>
+      <div class="d-flex justify-content-center mt-5">
+        <h2 class="me-5">{{ account.name }}</h2>
+        <button data-bs-toggle="modal" data-bs-target="#editAccountModal" class="btn fs-2" title="Edit Account"><i
+            class="mdi mdi-dots-horizontal"></i></button>
 
-        </div>
-        <div class="d-flex justify-content-center fw-bold">
-          <p> {{ vaults.length }} Vaults</p>
-          <p class="mx-2">|</p>
-          <p>{{ keeps.length }} Keeps</p>
-        </div>
+      </div>
+      <div class="d-flex justify-content-center fw-bold">
+        <p> {{ vaults.length }} Vaults</p>
+        <p class="mx-2">|</p>
+        <p>{{ keeps.length }} Keeps</p>
       </div>
     </section>
     <section class="row">
@@ -90,14 +90,22 @@ export default {
 </script>
 
 <style scoped>
-.cover-img {
-  object-position: center;
-  object-fit: cover;
-  width: 30em;
+.centered {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
+.relative {
+  position: relative;
+  text-align: center;
+  color: white;
+  border-radius: 20px;
+}
 
-img {
-  max-width: 100px;
+.picture {
+  max-height: 20vh;
+  max-width: 20vh;
+  box-shadow: 2px 10px gray;
 }
 </style>

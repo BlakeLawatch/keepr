@@ -1,16 +1,24 @@
 <template>
-    <div @click="setActiveKeep()" class="selectable box-shadow bg-img align-items-between my-3" :title="keep.name">
-        <div class="text-end">
+    <div @click="setActiveKeep()" class="relative selectable box-shadow bg-img my-3" :title="keep.name">
+        <img class="img-fluid" :src="keep.img" alt="">
+
+        <div class="top-right">
             <button v-if="keep.creatorId == account.id" @click.stop="destroyKeep(keep.id)"
-                class="btn btn-danger rounded-circle font"><i class="mdi mdi-close" title="Delete this Keep"></i></button>
+                class="btn btn-danger rounded-circle font-size"><i class="mdi mdi-close font-size"
+                    title="Delete this Keep"></i></button>
         </div>
-        <div class=" my-3 d-flex justify-content-between p-2">
+        <div class="centered my-3 d-flex justify-content-between p-2">
             <p class="mb-0 text-shadow text-light d-flex fs-3 fw-bold text-break"> {{ keep.name }}</p>
+        </div>
+        <div class="bottom-right">
             <router-link @click.stop :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
                 <img class="img-fluid profile" :src="keep.creator.picture" alt="Creator Profile" :title="keep.creator.name">
 
             </router-link>
+
         </div>
+
+
     </div>
 </template>
 data-bs-toggle="modal" data-bs-target="#keepModal"
@@ -34,7 +42,7 @@ export default {
     setup(props) {
 
         return {
-            coverImg: computed(() => `url(${props.keep.img})`),
+            coverImg: computed(() => `url(${props.keep?.img})`),
             account: computed(() => AppState.account),
 
 
@@ -59,12 +67,12 @@ export default {
 
 
 <style lang="scss" scoped>
-.bg-img {
-    background-image: v-bind(coverImg);
-    background-position: center;
-    background-size: cover;
-    height: 20vh;
-}
+// .bg-img {
+//     background-image: v-bind(coverImg);
+//     background-position: center;
+//     background-size: cover;
+//     height: 20vh;
+// }
 
 .text-shadow {
     text-shadow: 1px 1px 2px rgb(3, 3, 3);
@@ -72,5 +80,46 @@ export default {
 
 .box-shadow {
     box-shadow: 2px 2px 10px gray;
+}
+
+.font-size {
+    font-size: .5rem;
+}
+
+.relative {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+}
+
+.top-left {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+}
+
+.top-right {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+}
+
+.bottom-right {
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
 }
 </style>

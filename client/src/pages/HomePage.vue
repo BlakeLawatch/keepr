@@ -4,14 +4,10 @@
       <div class="col-3 d-flex my-2">
       </div>
     </section>
-    <section class="row">
-      <div class="masonry">
-        <div @click="getKeepById()" v-for="keep in keeps" :key="keep.id" class="col-6 col-md-3 w-100">
-          <KeepsComponent :keep="keep" />
-        </div>
-
+    <section class="masonry">
+      <div @click="getKeepById()" v-for="keep in keeps" :key="keep.id">
+        <KeepsComponent :keep="keep" />
       </div>
-
     </section>
   </div>
 
@@ -25,7 +21,6 @@ import { computed, watch } from 'vue';
 import { AppState } from '../AppState';
 import KeepsComponent from '../components/KeepsComponent.vue';
 import ActiveKeepModal from '../components/ActiveKeepModal.vue';
-import { Modal } from 'bootstrap';
 
 export default {
   setup() {
@@ -58,11 +53,6 @@ export default {
           Pop.error(error)
         }
       },
-
-      async createKeep() {
-        console.log('do i run');
-        Modal.getOrCreateInstance(`#keepModal`).show()
-      }
 
     };
   },

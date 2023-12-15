@@ -1,46 +1,26 @@
 <template>
     <div v-if="profile" class="container">
-        <section class="row justify-content-center">
-            <div class="col-6 text-center">
-                <div>
-                    <img class="img-fluid height" :src="profile.coverImg" alt="">
+        <section class="row">
+            <div class="relative">
+                <img class="img-fluid rounded" :src="profile.coverImg" alt="">
+                <div class="centered">
+                    <img class="img-fluid rounded-circle picture" :src="profile.picture" alt="">
                 </div>
-                <div>
-                    <img class="img-fluid height rounded-circle" :src="profile.picture" alt="">
-
-                    <p class="fs-2">{{ profile.name }}</p>
-
-                </div>
-                <div class="d-flex justify-content-center fw-bold">
-                    <p>{{ profileVaults.length }} Vaults</p>
-                    <p class="mx-2">|</p>
-                    <p>{{ keeps.length }} Keeps</p>
-
-                </div>
-
             </div>
         </section>
-        <section class="row justify-content-center">
+        <section class="row mt-5">
             <h1>Vaults</h1>
-            <div v-for="profileVault in profileVaults" :key="profileVault.id" class="col-8 col-md-2 text-center">
+            <div v-for="vault in vaults" :key="vault.id" class="col-6 col-md-3">
+                <router-link :to="{ name: 'Vault', params: { vaultId: vault.id } }">
+                    <VaultsComponent :vault="vault" />
 
-
-                <img class="img-fluid" :src="profileVault.img" alt="">
-                <router-link :to="{ name: 'Vault', params: { vaultId: profileVault.id } }">
-                    {{ profileVault.name }}
                 </router-link>
             </div>
         </section>
-        <section class="row justify-content-center">
+        <section class="row">
             <h1 class="my-5 my-2">Keeps</h1>
-            <div v-for="keep in keeps" :key="keep.id" class="col-8 col-md-2 text-center">
-                <div>
-                    <img class="img-fluid" :src="keep.img" alt="">
-                    {{ keep.name }}
-
-                </div>
-                <!-- <img class="img-fluid" :src="keep.img" alt=""> -->
-
+            <div v-for="keep in keeps" :key="keep.id" class="col-6 col-md-3">
+                <KeepsComponent :keep="keep" />
             </div>
         </section>
     </div>
@@ -55,6 +35,8 @@ import { profilesService } from '../services/ProfilesService.js'
 import Pop from '../utils/Pop';
 import { useRoute } from 'vue-router';
 import { AppState } from '../AppState.js'
+import KeepsComponent from '../components/KeepsComponent.vue';
+import VaultsComponent from '../components/VaultsComponent.vue';
 
 
 
@@ -98,32 +80,32 @@ export default {
         return {
             profile: computed(() => AppState.profiles),
             keeps: computed(() => AppState.profileKeeps),
-            profileVaults: computed(() => AppState.profileVaults.filter(profileVaults => profileVaults.isPrivate == false)),
-            coverImg: (() => `url(${AppState.profileKeeps.img})`),
-            // coverImgVaults: (() => `url(${AppState.profileVaults?.img})`)
+            vaults: computed(() => AppState.profileVaults.filter(profileVaults => profileVaults.isPrivate == false)),
         };
     },
-
+    components: { KeepsComponent, VaultsComponent }
 };
 </script>
 
 
 <style lang="scss" scoped>
-.bg-img {
-    background-image: v-bind(coverImg);
-    background-position: center;
-    background-size: cover;
-    height: 20vh;
+.centered {
+    position: absolute;
+    // top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-// .bg-img-vaults {
-//     background-image: v-bind(coverImgVaults);
-//     background-position: center;
-//     background-size: cover;
-//     height: 20vh;
-// }
+.relative {
+    position: relative;
+    text-align: center;
+    color: white;
+    border-radius: 20px;
+}
 
-.height {
-    max-height: 10vh;
+.picture {
+    max-height: 20vh;
+    max-width: 20vh;
+    box-shadow: 2px 10px gray;
 }
 </style>

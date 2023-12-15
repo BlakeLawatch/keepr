@@ -5,7 +5,7 @@
         <img alt="logo" src="src/assets/img/K-removebg-preview.png" height="75" />
       </div>
     </router-link>
-    <div class="dropdown">
+    <div class="dropdown" v-if="$route.name == 'Home'">
       <button class="btn btn-outline dropdown-toggle text-center" type="button" data-bs-toggle="dropdown"
         aria-expanded="false">
         Create

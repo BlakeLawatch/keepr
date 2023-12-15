@@ -30,7 +30,7 @@ export default {
     },
     setup(props) {
         return {
-            coverImg: computed(() => `url(${props.vault.img})`),
+            coverImg: computed(() => `url(${props.vault?.img})`),
             account: computed(() => AppState.account),
 
             async destroyVault(vaultId) {
