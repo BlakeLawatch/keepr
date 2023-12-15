@@ -1,19 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container my-5">
     <section v-if="account.id" class="row justify-content-center">
       <div class="col-3 d-flex my-2">
-        <button class="rounded-pill mx-1 btn-outline" data-bs-toggle="modal" data-bs-target="#createKeep">Create
-          Keep</button>
-        <button class="rounded-pill mx-1 btn-outline" data-bs-toggle="modal" data-bs-target="#createVault">Create
-          Vault</button>
-        <!-- <form class="my-3">
-          <label for="option" class="form-label"></label>
-          <select name="" id="" class="form-select">
-            <option data-bs-toggle="modal" data-bs-target="#createKeep" value="">New Keep</option>
-            <option data-bs-toggle="modal" data-bs-target="#createVault" value="">New Vault</option>
-          </select>
-          <button type="submit">Go</button>
-        </form> -->
       </div>
     </section>
     <section class="row">
@@ -26,8 +14,7 @@
 
     </section>
   </div>
-  <CreateVaultModal />
-  <CreateKeepModal />
+
   <ActiveKeepModal />
 </template>
 
@@ -38,8 +25,7 @@ import { computed, watch } from 'vue';
 import { AppState } from '../AppState';
 import KeepsComponent from '../components/KeepsComponent.vue';
 import ActiveKeepModal from '../components/ActiveKeepModal.vue';
-import CreateKeepModal from '../components/CreateKeepModal.vue';
-import CreateVaultModal from '../components/CreateVaultModal.vue';
+import { Modal } from 'bootstrap';
 
 export default {
   setup() {
@@ -71,11 +57,16 @@ export default {
         } catch (error) {
           Pop.error(error)
         }
+      },
+
+      async createKeep() {
+        console.log('do i run');
+        Modal.getOrCreateInstance(`#keepModal`).show()
       }
 
     };
   },
-  components: { ActiveKeepModal, CreateVaultModal, CreateKeepModal, KeepsComponent }
+  components: { ActiveKeepModal, KeepsComponent }
 }
 </script>
 

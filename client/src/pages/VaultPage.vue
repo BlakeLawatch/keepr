@@ -3,8 +3,8 @@
         <section class="row justify-content-center">
             <div class="col-12 col-md-3 bg-img text-center d-flex align-items-end">
                 <div>
-                    <p class="text-light fw-bold fs-4 text-shadow">{{ activeVault.name }}</p>
-                    <p class="text-light fw-bold fs-6">By {{ activeVault.creator.name }}</p>
+                    <p class="text-light fw-bold fs-4 text-shadow text-break">{{ activeVault.name }}</p>
+                    <p class="text-light fw-bold fs-6 text-break text-shadow">By {{ activeVault.creator.name }}</p>
                 </div>
             </div>
             <div class="text-center">
@@ -115,6 +115,6 @@ export default {
 }
 
 .text-shadow {
-    text-shadow: 1px 1px 2px black;
+    text-shadow: 1px 1px 3px black;
 }
 </style>

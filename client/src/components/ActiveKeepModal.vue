@@ -91,9 +91,7 @@ export default {
 
                 } catch (error) {
                     Pop.error("You've already kept this keep in this vault")
-                    // if (error.response.data.includes("Duplicate entry")) {
-                    //     Pop.error("You already have that keep kept in that vault")
-                    // }
+
 
 
 

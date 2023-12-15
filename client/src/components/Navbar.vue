@@ -5,6 +5,16 @@
         <img alt="logo" src="src/assets/img/K-removebg-preview.png" height="75" />
       </div>
     </router-link>
+    <div class="dropdown">
+      <button class="btn btn-outline dropdown-toggle text-center" type="button" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Create
+      </button>
+      <ul class="dropdown-menu">
+        <li class="ms-1" type="button" data-bs-toggle="modal" data-bs-target="#createKeep">Create Keep</li>
+        <li class="ms-1" type="button" data-bs-toggle="modal" data-bs-target="#createVault">Create Vault</li>
+      </ul>
+    </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
