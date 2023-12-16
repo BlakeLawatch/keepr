@@ -42,4 +42,8 @@ export default {
   width: 5vh;
   border-radius: 50%;
 }
+
+.info-text-shadow {
+  text-shadow: 3px 3px 2px #bfe5ec;
+}
 </style>

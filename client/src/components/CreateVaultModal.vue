@@ -2,10 +2,6 @@
     <div class="modal fade" id="createVault" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="createVault">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
                 <div class="modal-body">
                     <form @submit.prevent="createVault()">
                         <div class="mb-3">
@@ -27,7 +23,10 @@
                             <label for="isPrivate" class="form-label">Private?</label>
                             <input v-model="editable.isPrivate" type="checkbox" class="rounded" id="isPrivate">
                         </div>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-info text-white">Save changes</button>
+                        </div>
                     </form>
                 </div>
 

@@ -62,7 +62,7 @@ export default {
 
 <style scoped lang="scss">
 .masonry {
-  columns: 300px;
+  columns: 250px;
 }
 
 @media (max-width: 845px) {

@@ -6,13 +6,13 @@
       </div>
     </router-link>
     <div class="dropdown" v-if="$route.name == 'Home'">
-      <button class="btn btn-outline dropdown-toggle text-center" type="button" data-bs-toggle="dropdown"
-        aria-expanded="false">
+      <button class="btn dropdown-toggle btn-outline text-center info-text-shadow text-info" type="button"
+        data-bs-toggle="dropdown" aria-expanded="false">
         Create
       </button>
-      <ul class="dropdown-menu">
-        <li class="ms-1" type="button" data-bs-toggle="modal" data-bs-target="#createKeep">Create Keep</li>
-        <li class="ms-1" type="button" data-bs-toggle="modal" data-bs-target="#createVault">Create Vault</li>
+      <ul class="dropdown-menu text-center">
+        <li type="button" data-bs-toggle="modal" data-bs-target="#createKeep">Create Keep</li>
+        <li type="button" data-bs-toggle="modal" data-bs-target="#createVault">Create Vault</li>
       </ul>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -52,7 +52,8 @@ export default {
         theme.value = theme.value == 'light' ? 'dark' : 'light'
         document.documentElement.setAttribute('data-bs-theme', theme.value)
         saveState('theme', theme.value)
-      }
+      },
+
     }
   },
   components: { Login }

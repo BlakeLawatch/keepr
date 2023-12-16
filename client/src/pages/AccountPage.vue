@@ -106,6 +106,6 @@ export default {
 .picture {
   max-height: 20vh;
   max-width: 20vh;
-  box-shadow: 2px 10px gray;
+  box-shadow: 2px 5px gray;
 }
 </style>

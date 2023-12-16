@@ -2,9 +2,8 @@
     <div class="modal fade" id="createKeep" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add your keep</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="text-center">
+                    <h1 class="text-center text-info info-text-shadow">keep</h1>
                 </div>
                 <div class="modal-body">
                     <form @submit.prevent="createKeep()">
@@ -23,9 +22,9 @@
                             <input v-model="editable.description" type="text" class="form-control" id="description" required
                                 maxlength="500">
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-info text-white">Save changes</button>
                         </div>
                     </form>
                 </div>

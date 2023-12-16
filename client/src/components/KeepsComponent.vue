@@ -67,13 +67,6 @@ export default {
 
 
 <style lang="scss" scoped>
-// .bg-img {
-//     background-image: v-bind(coverImg);
-//     background-position: center;
-//     background-size: cover;
-//     height: 20vh;
-// }
-
 .text-shadow {
     text-shadow: 1px 1px 2px rgb(3, 3, 3);
 }
