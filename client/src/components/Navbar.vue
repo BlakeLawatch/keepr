@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-sm navbar-dark px-3">
     <router-link class="navbar-brand d-flex" title="Home Page" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="src/assets/img/K-removebg-preview.png" height="75" />
+        <img alt="logo" src="/K-removebg-preview.png" height="75" />
       </div>
     </router-link>
     <div class="dropdown" v-if="$route.name == 'Home'">
