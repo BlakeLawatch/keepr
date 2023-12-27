@@ -13,8 +13,6 @@
 import { computed, onMounted } from 'vue'
 import { AppState } from './AppState'
 import Navbar from './components/Navbar.vue'
-import Pop from './utils/Pop'
-import { accountService } from './services/AccountService'
 import CreateVaultModal from './components/CreateVaultModal.vue'
 import CreateKeepModal from './components/CreateKeepModal.vue'
 
