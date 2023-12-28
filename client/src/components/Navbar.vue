@@ -10,7 +10,7 @@
         data-bs-toggle="dropdown" aria-expanded="false">
         Create
       </button>
-      <ul class="dropdown-menu text-center">
+      <ul v-if="account" class="dropdown-menu text-center">
         <li type="button" data-bs-toggle="modal" data-bs-target="#createKeep">Create Keep</li>
         <li type="button" data-bs-toggle="modal" data-bs-target="#createVault">Create Vault</li>
       </ul>
